@@ -1,5 +1,5 @@
-﻿using Analizer.CommonModels;
-using Analizer.Entractor.Config;
+﻿using Analizer.Entractor.Config;
+using Analizer.Entractor.InternalModels;
 using Analizer.Extractor.DataExtraction;
 
 namespace Analizer.Entractor
@@ -10,11 +10,11 @@ namespace Analizer.Entractor
 
             var confVal = ConfigValidator.getCofigForDefaultLocation();
             config = confVal.config;
-            analizerModel = EntitiesExtractor.initAnalizerModel(config);
+            model = EntitiesExtractor.CreateConstructionModel(config);
         }
 
-        ConfigModel config;
+        private ConfigModel config;
 
-        private AnalizerModel analizerModel;
+        public ConstructionModel model { get; private set; }
     }
 }

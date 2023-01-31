@@ -7,16 +7,16 @@ namespace Analizer.Extractor.DataExtraction
 {
     class EntitiesExtractor
     {
-        private static AnalizerModel initModel(int count)
+        private static ConstructionModel initModel(int count)
         {
             return new ConstructionModel(count, new string[] { "" });
         }
 
-        public static AnalizerModel initAnalizerModel(ConfigModel config)
+        public static ConstructionModel CreateConstructionModel(ConfigModel config)
         {
-            AnalizerModel analizerModel;
+            ConstructionModel analizerModel;
 
-            string structFile = (string)config.Input["struct"];
+            string structFile = config.root + (string)config.Input["struct"];
 
             var input = CsvFileHelper.getInstance().getArrayContent<StructMinerModel>(structFile);
 
