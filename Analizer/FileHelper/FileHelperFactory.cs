@@ -1,20 +1,35 @@
-﻿namespace Analizer.FileHelper
+﻿using Analizer.FileHelper.Implementation;
+
+namespace Analizer.FileHelper
 {
     internal class FileHelperFactory
     {
-        public FileHelperInterface getCsvHelper()
+        public CsvFileHelper getCsvHelper()
         {
-            throw new NotImplementedException();
+            return CsvFileHelper.getInstance();
         }
 
-        public FileHelperInterface getJsonHelper()
+        public JsonFileHelper getJsonHelper()
         {
-            throw new NotImplementedException();
+            return JsonFileHelper.getInstance();
         }
 
         public FileHelperInterface getXmlHelper()
         {
             throw new NotImplementedException();
+        }
+
+        public FileHelperInterface getFileHelper(string fileExtension)
+        {
+            switch (fileExtension)
+            {
+                case "csv":
+                    return getCsvHelper();
+                case ".json":
+                    return getJsonHelper();
+            }
+
+            throw new UnsuportedFileTypeException(fileExtension);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Analizer.FileHelper.Implementation;
+﻿using Analizer.FileHelper;
+using Analizer.FileHelper.Implementation;
 
 namespace Analizer.Entractor.Config
 {
@@ -77,7 +78,7 @@ namespace Analizer.Entractor.Config
 
             //verify if format is accepted by the current implementation
             if (!FileHelper.FileUtilities.acceptedFileExtensions.Contains(_config.OutputFile["format"]))
-                throw new InvalidConfigOutputException(_config.OutputFile["format"] + " file format not accepted");
+                throw new UnsuportedFileTypeException(_config.OutputFile["format"]);
         }
 
         /// <summary>
