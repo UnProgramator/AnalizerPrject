@@ -65,8 +65,10 @@ namespace Analizer.Entractor.Config
 
             //verify out file format; if none specified, then take from string
             if (!_config.OutputFile.ContainsKey("format")){
-                if (fileFormat == null)
-                    fileFormat = "bin";
+                if (fileFormat == null) {
+                    fileFormat = ".json";
+                    _config.OutputFile["file"] += fileFormat;
+                }
                 _config.OutputFile["format"] = fileFormat;
             }
             //verify if specified file format and the one from the path are the same
