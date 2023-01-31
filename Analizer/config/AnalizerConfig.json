@@ -1,7 +1,7 @@
 ﻿{
   "OutputFile": {
     "file": "outfile",
-    "format": "json"
+    "format": ".json"
   },
   "DefaultInput": true,
   "Root": "D:\\Scoala\\Poli\\Master\\disertatie\\dx\\argouml-dx\\argouml-dx\\",
