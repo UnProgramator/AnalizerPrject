@@ -10,12 +10,10 @@
 
             if (extension.Equals(""))
                 extension = null;
-            else
-                extension = extension.Substring(1);
 
             return extension;
         }
 
-        public static readonly string[] acceptedFileExtensions = new string[] { "csv", "json" };
+        public static readonly string[] acceptedFileExtensions = new string[] { ".csv", ".json" };
     }
 }
