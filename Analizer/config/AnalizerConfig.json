@@ -1,0 +1,13 @@
+﻿{
+  "OutputFile": {
+    "file": "outfile",
+    "format": "json"
+  },
+  "DefaultInput": true,
+  "Root": "D:\\Scoala\\Poli\\Master\\disertatie\\dx\\argouml-dx\\argouml-dx\\",
+  "Input": {
+
+    "struct": "+struct-results\\+tuning\\files-processed-argouml.csv",
+    "relation": ""
+  }
+}
