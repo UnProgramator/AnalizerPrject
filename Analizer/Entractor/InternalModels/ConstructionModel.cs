@@ -13,10 +13,10 @@ namespace Analizer.Entractor.InternalModels
 
         public void addRelation(string entity1, string entity2, KeyValuePair<string, dynamic> relation)
         {
-            if (entitiesQuickIndex.ContainsKey(entity1))
+            if (!entitiesQuickIndex.ContainsKey(entity1))
                 throw new EntityUsedButNotDeclaredException($"Entity {entity1} not declared prior to adding relation implication");
 
-            if (entitiesQuickIndex.ContainsKey(entity2))
+            if (!entitiesQuickIndex.ContainsKey(entity2))
                 throw new EntityUsedButNotDeclaredException($"Entity {entity2} not declared prior to adding relation implication");
 
             int index1 = entitiesQuickIndex[entity1];
