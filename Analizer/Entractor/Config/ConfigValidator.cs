@@ -65,16 +65,23 @@ namespace Analizer.Entractor.Config
                 fileFormat = FileHelper.FileUtilities.getFileExtension(_config.OutputFile["file"]);
 
             //verify out file format; if none specified, then take from string
-            if (!_config.OutputFile.ContainsKey("format")){
-                if (fileFormat == null) {
+            if (!_config.OutputFile.ContainsKey("format")) {
+                if (fileFormat == null)
+                {
                     fileFormat = ".json";
                     _config.OutputFile["file"] += fileFormat;
                 }
                 _config.OutputFile["format"] = fileFormat;
             }
-            //verify if specified file format and the one from the path are the same
-            else if (!_config.OutputFile["format"].Equals(fileFormat))
-                throw new InvalidConfigOutputException("File format from param and from file path are different");
+            
+            else {
+                //if file format is specified and but not added to the file, then it is added
+                if (fileFormat == null)
+                    _config.OutputFile["file"] += fileFormat;
+                //verify if specified file format and the one from the path are the same
+                else if (!_config.OutputFile["format"].Equals(fileFormat))
+                    throw new InvalidConfigOutputException("File format from param and from file path are different");
+            }
 
             //verify if format is accepted by the current implementation
             if (!FileHelper.FileUtilities.acceptedFileExtensions.Contains(_config.OutputFile["format"]))
