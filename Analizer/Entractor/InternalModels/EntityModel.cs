@@ -2,12 +2,18 @@
 
 namespace Analizer.Entractor.InternalModels
 {
-    class StructMinerModel
+    class EntityModel
     {
         [Name("PackageName(only applies to certain filetypes)")]
-        public string PackageName { get; set; } = "";
+        public string? PackageName { get; set; }
         public string Filename { get; set; } = "";
         public string Extension { get; set; } = "";
+        public string RawPath { get; set; } = "";
+        public string? Module { get; set; }
+        public string? SubModule { get; set; }
+        public long LinesOfCode { get; set; } = 0;
+        [Name("#Changes")]
+        public long Changes { get; set; } = 0;
 
         public override string ToString()
         {
