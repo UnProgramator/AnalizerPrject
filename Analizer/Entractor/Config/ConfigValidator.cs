@@ -77,7 +77,7 @@ namespace Analizer.Entractor.Config
             else {
                 //if file format is specified and but not added to the file, then it is added
                 if (fileFormat == null)
-                    _config.OutputFile["file"] += fileFormat;
+                    _config.OutputFile["file"] += _config.OutputFile["format"];
                 //verify if specified file format and the one from the path are the same
                 else if (!_config.OutputFile["format"].Equals(fileFormat))
                     throw new InvalidConfigOutputException("File format from param and from file path are different");
