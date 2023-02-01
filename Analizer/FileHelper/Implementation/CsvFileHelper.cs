@@ -1,6 +1,7 @@
 ﻿using CsvHelper.Configuration;
 using CsvHelper;
 using System.Globalization;
+using System.Collections;
 
 namespace Analizer.FileHelper.Implementation
 {
@@ -61,15 +62,15 @@ namespace Analizer.FileHelper.Implementation
 
             return content;
         }
-        public void writeContent<T>(string filename, object content)
+        public void writeContent(string filename, object content)
         {
-            if (content is not IEnumerable<T>)
-                throw new Exception("parameter \"content\" is of type " + content.GetType().Name + ", but expected variable of type IEnumerable<" + typeof(T).Name + ">");
-
             using (var writer = new StreamWriter(filename))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
-                csv.WriteRecords((IEnumerable<T>)content);
+                if (content is not IEnumerable)
+                    csv.WriteRecords((IEnumerable)content);
+                else
+                    csv.WriteRecord(content);
             }
         }
 

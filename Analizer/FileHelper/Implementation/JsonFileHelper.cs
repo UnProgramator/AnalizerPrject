@@ -44,7 +44,7 @@ namespace Analizer.FileHelper.Implementation
             return content;
         }
 
-        public void writeContent<T>(string filename, object content)
+        public void writeContent(string filename, object content)
         {
             using (StreamWriter file = File.CreateText(filename))
             {
