@@ -5,7 +5,7 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        new Extractor();
+        new Extractor().save();
 
         Console.WriteLine();
     }

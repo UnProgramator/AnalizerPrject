@@ -1,6 +1,8 @@
 ﻿using Analizer.Entractor.Config;
+using Analizer.Entractor.DataExtraction;
 using Analizer.Entractor.InternalModels;
 using Analizer.Extractor.DataExtraction;
+using Analizer.FileHelper;
 
 namespace Analizer.Entractor
 {
@@ -10,7 +12,14 @@ namespace Analizer.Entractor
 
             var confVal = ConfigValidator.getCofigForDefaultLocation();
             config = confVal.config;
-            model = EntitiesExtractor.CreateConstructionModel(config);
+            model = EntitiesExtractor.CreateConstructionModel(config.root + (string)config.Input["struct"]);
+            HierarchyExtractor.extract(model, config.root + "/" + config.Input["hierarchy"]); 
+        }
+
+        public void save()
+        {
+            FileHelperInterface writer = new FileHelperFactory().getJsonHelper();
+            writer.writeContent(config.OutputFile["file"], model);
         }
 
         private ConfigModel config;

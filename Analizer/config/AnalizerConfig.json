@@ -1,13 +1,12 @@
 ﻿{
   "OutputFile": {
-    "file": "outfile",
+    "file": "D:\\Scoala\\Poli\\DXWorks\\results\\argouml\\analizer\\outfile",
     "format": ".json"
   },
   "DefaultInput": true,
-  "Root": "D:\\Scoala\\Poli\\Master\\disertatie\\dx\\argouml-dx\\argouml-dx\\",
+  "Root": "D:\\Scoala\\Poli\\DXWorks\\results\\argouml\\argouml-dx\\",
   "Input": {
-
     "struct": "+struct-results\\+tuning\\files-processed-argouml.csv",
-    "relation": ""
+    "hierarchy": "+dx-results\\relations\\chronos1\\Structural\\files-Hierarchy_Specific_Relations.csv"
   }
 }

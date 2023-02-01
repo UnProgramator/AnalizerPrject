@@ -12,13 +12,11 @@ namespace Analizer.Extractor.DataExtraction
             return new ConstructionModel(count, new string[] { "" });
         }
 
-        public static ConstructionModel CreateConstructionModel(ConfigModel config)
+        public static ConstructionModel CreateConstructionModel(string filePath)
         {
             ConstructionModel analizerModel;
 
-            string structFile = config.root + (string)config.Input["struct"];
-
-            var input = CsvFileHelper.getInstance().getArrayContent<StructMinerModel>(structFile);
+            var input = CsvFileHelper.getInstance().getArrayContent<EntityModel>(filePath);
 
             if (input == null)
                 throw new Exception("Error during reading struct file");
@@ -36,7 +34,16 @@ namespace Analizer.Extractor.DataExtraction
 
             foreach (var file in input)
             {
-                analizerModel.addEntity(file.Filename, new Dictionary<string, dynamic>() { { "package", file.PackageName } });
+                var properties = new Dictionary<string, dynamic>() {
+                    { "path", file.RawPath},
+                    { "LOC", file.LinesOfCode },
+                    { "changes", file.Changes}
+                };
+                
+                if (file.Module != null) properties.Add("module", file.Module);
+                if (file.PackageName != null)  properties.Add("package", file.PackageName);
+
+                analizerModel.addEntity(file.RawPath + "/" + file.Filename, properties);
             }
 
             return analizerModel;
