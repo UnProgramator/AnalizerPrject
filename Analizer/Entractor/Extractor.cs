@@ -19,7 +19,7 @@ namespace Analizer.Entractor
         public void save()
         {
             FileHelperInterface writer = new FileHelperFactory().getJsonHelper();
-            writer.writeContent(config.OutputFile["file"], model);
+            writer.writeContent(config.OutputFile["file"], model.compress());
         }
 
         private ConfigModel config;

@@ -25,6 +25,19 @@
             lastIndex = 0;
         }
 
+        protected AnalizerModel(int entityCount, string[] properties, EntityInformation[] entities)
+        {
+            Entities = entities;
+
+            Relations = new EntitiesRelations[entityCount, entityCount];
+
+            Properties = properties;
+
+            this.entityCount = entityCount;
+
+            lastIndex = 0;
+        }
+
         public void addRelation(int index1, int index2, KeyValuePair<string,dynamic> relation)
         {
             if (Relations[index1, index2] is null)
@@ -52,6 +65,29 @@
             newObject.lastIndex = entityCount;
 
             return newObject;
-    }
+        }
+
+        public AnalizerCompresedModel compress()
+        {
+            AnalizerCompresedModel compresedModel = new AnalizerCompresedModel(entityCount, Properties, Entities);
+            for (int i = 0; i < entityCount; i++)
+                for (int j = 0; j < entityCount; j++)
+                    if (Relations[i, j] != null)
+                        compresedModel.Relations.Add(Tuple.Create(i, j), Relations[i, j]);
+            return compresedModel;
+        }
+
+        public static AnalizerModel decompress(AnalizerCompresedModel compressedModel)
+        {
+            AnalizerModel model = new AnalizerModel(compressedModel.entityCount, compressedModel.Properties, compressedModel.Entities);
+            foreach(var x in compressedModel.Relations)
+            {
+                int i = x.Key.Item1;
+                int j = x.Key.Item2;
+                model.Relations[i, j] = x.Value;
+            }
+
+            return model;
+        }
     }
 }
