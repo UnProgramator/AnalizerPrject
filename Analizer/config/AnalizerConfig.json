@@ -7,6 +7,8 @@
   "Root": "D:\\Scoala\\Poli\\DXWorks\\results\\argouml\\argouml-dx\\",
   "Input": {
     "struct": "+struct-results\\+tuning\\files-processed-argouml.csv",
-    "hierarchy": "+dx-results\\relations\\chronos1\\Structural\\files-Hierarchy_Specific_Relations.csv"
+    "hierarchy": "+dx-results\\relations\\chronos1\\Structural\\files-Hierarchy_Specific_Relations.csv",
+    "cochange_number": "+dx-results\\relations\\chronos1\\Temporal-Commits\\files-Temporal_Coupling_Commits.csv",
+    "cochange_percent": "+dx-results\\relations\\chronos1\\Temporal-Commits\\files-Temporal_Coupling_Percentage_Commits.csv"
   }
 }
