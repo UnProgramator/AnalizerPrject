@@ -3,96 +3,95 @@ using CsvHelper;
 using System.Globalization;
 using System.Collections;
 
-namespace Analizer.FileHelper.Implementation
+namespace DRSTool.FileHelper.Implementation;
+
+class CsvFileHelper : IFileHelper
 {
-    class CsvFileHelper : FileHelperInterface
+    public IEnumerable<T>? getArrayContent<T>(string filename)
     {
-        public IEnumerable<T>? getArrayContent<T>(string filename)
+        IEnumerable<T>? content = null;
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
-            IEnumerable<T>? content = null;
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = true,
-            };
-            var reader = new StreamReader(filename);
-            var csv = new CsvReader(reader, config);
-            content = csv.GetRecords<T>();
+            HasHeaderRecord = true,
+        };
+        var reader = new StreamReader(filename);
+        var csv = new CsvReader(reader, config);
+        content = csv.GetRecords<T>();
 
-            return content;
+        return content;
+    }
+
+    public T? getContent<T>(string filename)
+    {
+        T? content = default;
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            HasHeaderRecord = true,
+        };
+        var reader = new StreamReader(filename);
+        var csv = new CsvReader(reader, config);
+        content = csv.GetRecord<T>();
+
+        return content;
+    }
+
+    public Dictionary<string, object>[]? getContentAsDictArray(string filename)
+    {
+        Dictionary<string, object>[]? content;
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            HasHeaderRecord = true,
+        };
+        var reader = new StreamReader(filename);
+        var csv = new CsvReader(reader, config);
+        content = csv.GetRecord<Dictionary<string, object>[]?>();
+
+        return content;
+    }
+
+    public Dictionary<string, object>? getContentAsDict(string filename)
+    {
+        Dictionary<string, object>? content;
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            HasHeaderRecord = true,
+        };
+        var reader = new StreamReader(filename);
+        var csv = new CsvReader(reader, config);
+        content = csv.GetRecord<Dictionary<string, object>?>();
+
+        return content;
+    }
+    public void writeContent(string filename, object content)
+    {
+        using (var writer = new StreamWriter(filename))
+        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+        {
+            if (content is not IEnumerable)
+                csv.WriteRecords((IEnumerable)content);
+            else
+                csv.WriteRecord(content);
         }
+    }
 
-        public T? getContent<T>(string filename)
+    private CsvFileHelper() { }
+
+    private static CsvFileHelper? __instance;
+    private static object __barier = new object();
+
+    public static CsvFileHelper getInstance()
+    {
+        if (__instance == null)
         {
-            T? content = default;
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            lock (__barier)
             {
-                HasHeaderRecord = true,
-            };
-            var reader = new StreamReader(filename);
-            var csv = new CsvReader(reader, config);
-            content = csv.GetRecord<T>();
-
-            return content;
-        }
-
-        public Dictionary<string, object>[]? getContentAsDictArray(string filename)
-        {
-            Dictionary<string, object>[]? content;
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = true,
-            };
-            var reader = new StreamReader(filename);
-            var csv = new CsvReader(reader, config);
-            content = csv.GetRecord<Dictionary<string, object>[]?>();
-
-            return content;
-        }
-
-        public Dictionary<string, object>? getContentAsDict(string filename)
-        {
-            Dictionary<string, object>? content;
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = true,
-            };
-            var reader = new StreamReader(filename);
-            var csv = new CsvReader(reader, config);
-            content = csv.GetRecord<Dictionary<string, object>?>();
-
-            return content;
-        }
-        public void writeContent(string filename, object content)
-        {
-            using (var writer = new StreamWriter(filename))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-            {
-                if (content is not IEnumerable)
-                    csv.WriteRecords((IEnumerable)content);
-                else
-                    csv.WriteRecord(content);
-            }
-        }
-
-        private CsvFileHelper() { }
-
-        private static CsvFileHelper? __instance;
-        private static object __barier = new object();
-
-        public static CsvFileHelper getInstance()
-        {
-            if (__instance == null)
-            {
-                lock (__barier)
+                if (__instance == null)
                 {
-                    if (__instance == null)
-                    {
-                        __instance = new CsvFileHelper();
-                    }
+                    __instance = new CsvFileHelper();
                 }
             }
-
-            return __instance;
         }
+
+        return __instance;
     }
 }

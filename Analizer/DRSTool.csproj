@@ -13,10 +13,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Analizer\" />
-  </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy &quot;$(ProjectDir)config\AnalizerConfig.json&quot; &quot;$(SolutionDir)Analizer\bin\Debug\net6.0&quot; /i /y" />
   </Target>

@@ -1,19 +1,18 @@
-﻿namespace Analizer.FileHelper
+﻿namespace DRSTool.FileHelper;
+
+class FileUtilities
 {
-    class FileUtilities
+    public static string? getFileExtension(string filename)
     {
-        public static string? getFileExtension(string filename)
-        {
-            string? extension = null;
+        string? extension = null;
 
-            extension = Path.GetExtension(filename);
+        extension = Path.GetExtension(filename);
 
-            if (extension.Equals(""))
-                extension = null;
+        if (extension.Equals(""))
+            extension = null;
 
-            return extension;
-        }
-
-        public static readonly string[] acceptedFileExtensions = new string[] { ".csv", ".json" };
+        return extension;
     }
+
+    public static readonly string[] acceptedFileExtensions = new string[] { ".csv", ".json" };
 }

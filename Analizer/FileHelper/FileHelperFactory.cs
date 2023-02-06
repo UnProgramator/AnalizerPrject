@@ -1,35 +1,34 @@
-﻿using Analizer.FileHelper.Implementation;
+﻿using DRSTool.FileHelper.Implementation;
 
-namespace Analizer.FileHelper
+namespace DRSTool.FileHelper;
+
+internal class FileHelperFactory
 {
-    internal class FileHelperFactory
+    public CsvFileHelper getCsvHelper()
     {
-        public CsvFileHelper getCsvHelper()
+        return CsvFileHelper.getInstance();
+    }
+
+    public JsonFileHelper getJsonHelper()
+    {
+        return JsonFileHelper.getInstance();
+    }
+
+    public IFileHelper getXmlHelper()
+    {
+        throw new NotImplementedException();
+    }
+
+    public IFileHelper getFileHelper(string fileExtension)
+    {
+        switch (fileExtension)
         {
-            return CsvFileHelper.getInstance();
+            case "csv":
+                return getCsvHelper();
+            case ".json":
+                return getJsonHelper();
         }
 
-        public JsonFileHelper getJsonHelper()
-        {
-            return JsonFileHelper.getInstance();
-        }
-
-        public FileHelperInterface getXmlHelper()
-        {
-            throw new NotImplementedException();
-        }
-
-        public FileHelperInterface getFileHelper(string fileExtension)
-        {
-            switch (fileExtension)
-            {
-                case "csv":
-                    return getCsvHelper();
-                case ".json":
-                    return getJsonHelper();
-            }
-
-            throw new UnsuportedFileTypeException(fileExtension);
-        }
+        throw new UnsuportedFileTypeException(fileExtension);
     }
 }

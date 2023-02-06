@@ -1,11 +1,19 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Analizer.Entractor;
+using DRSTool.Extractor;
+using DRSTool.Analizer;
+
+namespace DRSTool;
 
 internal class Program
 {
     public static void Main(string[] args)
     {
-        new Extractor().save();
+        var model = new Extractor.Extractor().model;
+
+        var analizer = new Analizer.Analizer(model);
+        analizer.analize();
+        analizer.writeInConsole();
+        analizer.saveResults();
 
         Console.WriteLine();
     }
