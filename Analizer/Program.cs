@@ -12,7 +12,6 @@ internal class Program
 
         var analizer = new Analizer.Analizer(model);
         analizer.analize();
-        analizer.writeInConsole();
         analizer.saveResults();
 
         Console.WriteLine();
