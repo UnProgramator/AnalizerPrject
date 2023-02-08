@@ -1,0 +1,57 @@
+{
+  "OutputFile": {
+    "file": "file-full-path",
+    "format": "optional - the extension of the file"
+  },
+  "DefaultInput": true,
+  "Root": "root-directory",
+  "Input": {
+    "there are 2 types on the input of a file": "predefined and custom",
+    "the predefined is used to specify the location of a file for custom props and relations": 0,
+    "the word predefined must be replaced by the property name, as it must be introduced": 0,
+    "the custom came in 3 flavors": "add the entities, add entity property, add relation and add project (overall) property",
+    "the filed name of the property must replace the letter x. the type is specified after x, as in template": 0,
+    "the file path must be relative to the root, unless specified by the field \"ignore root\", as shown for x-property": 0,
+    "for entities, the entity field must specify the field in csv/json/xml... for the field it search for": 0,
+    "in the case of relations, there are 2 params : the column/row to specify the pozition in the matrix and if it's symetric of not": 0,
+    "0": "symetric means that the relation affects both entities in the same way, like cochanges",
+    "1": "not symetric it means that it affects the row relative to the columns, eg. row inherits column, row depends on column etc.",
+    "the struct property is special and is mandatory": "it specifies the file that contains the files/objects",
+    "for now, the dynamic implementation is in development, so the default should be used, the one specified with path not with object": 0,
+    "for now, for default files system, it's required the files to be relative to the root. ": 0,
+    "if root is empty, then the path is the absolute path": 0,
+
+    "predefined": "file-path-relative-to-root",
+    "struct": {
+      "explain":  "this is the custom struct input format. not implemented at the moment",
+      "entity": "field",
+      "ignore-root": true,
+      "file": "file-path-relative-to-root",
+      "property": [
+        [ "prop", "field" ]
+      ]
+    },
+    "x-entity-property": {
+      "file": "file-path-relative-to-root",
+      "entity": "field",
+      "property": [
+        [ "prop", "field" ]
+      ]
+    },
+    "x-relation": {
+      "file": "file-path-relative-to-root",
+      "column": "field",
+      "row": "field",
+      "symetric": true,
+      "property": [
+        [ "prop", "field" ]
+      ]
+    },
+    "x-project-property": {
+      "file": "file-path-relative-to-root",
+      "property": [
+        [ "prop", "field" ]
+      ]
+    }
+  }
+}
