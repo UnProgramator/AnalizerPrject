@@ -1,4 +1,6 @@
-﻿namespace DRSTool.CommonModels;
+﻿using DRSTool.CommonModels.Exceptions;
+
+namespace DRSTool.CommonModels;
 
 class AnalizerModel
 {
@@ -54,12 +56,30 @@ class AnalizerModel
             addRelation(index2, index1, relation, false);
     }
 
+    public void addRelation(string entity1, string entity2, KeyValuePair<string, dynamic> relation, bool symmtric = false)
+    {
+        int index1 = getIndexForEntity(entity1);
+        int index2 = getIndexForEntity(entity2);
+
+        addRelation(index1, index2, relation, symmtric);
+    }
+
     public virtual void addEntity(string name, Dictionary<string, dynamic>? properties = null)
     {
         if (lastIndex == entityCount)
             throw new IndexOutOfRangeException("Trying to add more entities than initially declared");
         Entities[lastIndex] = new EntityInformation(name, properties);
         lastIndex++;
+    }
+
+    protected virtual int getIndexForEntity(string entityName)
+    {
+        for (int i = 0; i < Entities.Length; i++)
+        {
+            if (Entities[i].Name.Equals(entityName))
+                return i;
+        }
+        throw new EntityUsedButNotDeclaredException($"Entity {entityName} not declared prior to adding relation implication");
     }
 
     protected AnalizerModel shallowCopy()

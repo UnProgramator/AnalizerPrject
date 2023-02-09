@@ -1,4 +1,5 @@
 ﻿using DRSTool.CommonModels;
+using DRSTool.CommonModels.Exceptions;
 
 namespace DRSTool.Extractor.InternalModels;
 
@@ -11,18 +12,11 @@ class ConstructionModel : AnalizerModel
         entitiesQuickIndex = new Dictionary<string, int>(entityCount);
     }
 
-    public void addRelation(string entity1, string entity2, KeyValuePair<string, dynamic> relation, bool symmetric = false)
+    protected override int getIndexForEntity(string entityName)
     {
-        if (!entitiesQuickIndex.ContainsKey(entity1))
-            throw new EntityUsedButNotDeclaredException($"Entity {entity1} not declared prior to adding relation implication");
-
-        if (!entitiesQuickIndex.ContainsKey(entity2))
-            throw new EntityUsedButNotDeclaredException($"Entity {entity2} not declared prior to adding relation implication");
-
-        int index1 = entitiesQuickIndex[entity1];
-        int index2 = entitiesQuickIndex[entity2];
-
-        addRelation(index1, index2, relation, symmetric);
+        if (!entitiesQuickIndex.ContainsKey(entityName))
+            throw new EntityUsedButNotDeclaredException($"Entity {entityName} not declared prior to adding relation implication");
+        return entitiesQuickIndex[entityName];
     }
 
     public override void addEntity(string name, Dictionary<string, dynamic>? properties = null)
@@ -35,10 +29,4 @@ class ConstructionModel : AnalizerModel
     {
         return shallowCopy();
     }
-}
-
-class EntityUsedButNotDeclaredException : Exception
-{
-    public EntityUsedButNotDeclaredException() : base() { }
-    public EntityUsedButNotDeclaredException(string message) : base(message) { }
 }

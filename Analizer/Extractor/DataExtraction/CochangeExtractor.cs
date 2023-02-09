@@ -1,6 +1,7 @@
 ﻿using DRSTool.Extractor.InternalModels;
 using DRSTool.FileHelper.Implementation;
 using CsvHelper.Configuration.Attributes;
+using DRSTool.CommonModels.Exceptions;
 
 namespace DRSTool.Extractor.DataExtraction;
 

@@ -19,8 +19,13 @@ internal class FileHelperFactory
         throw new NotImplementedException();
     }
 
-    public IFileHelper getFileHelper(string fileExtension)
+    public IFileHelper getFileHelper(string file)
     {
+        string? fileExtension = FileUtilities.getFileExtension(file);
+
+        if(fileExtension == null)
+            throw new UnsuportedFileTypeException("type not specified");
+
         switch (fileExtension)
         {
             case "csv":
