@@ -45,6 +45,14 @@ class AnalizerModel
         lastIndex = 0;
     }
 
+    public virtual void addEntity(string name, Dictionary<string, dynamic>? properties = null)
+    {
+        if (lastIndex == entityCount)
+            throw new IndexOutOfRangeException("Trying to add more entities than initially declared");
+        Entities[lastIndex] = new EntityInformation(name, properties);
+        lastIndex++;
+    }
+
     public void addRelation(int index1, int index2, KeyValuePair<string,dynamic> relation, bool symmtric = false)
     {
         if (Relations[index1, index2] is null)
@@ -64,12 +72,15 @@ class AnalizerModel
         addRelation(index1, index2, relation, symmtric);
     }
 
-    public virtual void addEntity(string name, Dictionary<string, dynamic>? properties = null)
+    public void addEntityProperty(int entityIndex, KeyValuePair<string, dynamic> property)
     {
-        if (lastIndex == entityCount)
-            throw new IndexOutOfRangeException("Trying to add more entities than initially declared");
-        Entities[lastIndex] = new EntityInformation(name, properties);
-        lastIndex++;
+        Entities[entityIndex].addProperty(property);
+    }
+
+    public void addEntityProperty(string entityName, KeyValuePair<string, dynamic> property)
+    {
+        int index = getIndexForEntity(entityName);
+        addEntityProperty(index, property);
     }
 
     protected virtual int getIndexForEntity(string entityName)

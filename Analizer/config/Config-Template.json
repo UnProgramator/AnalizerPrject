@@ -42,7 +42,7 @@
       "file": "file-path-relative-to-root",
       "column": "field",
       "row": "field",
-      "symetric": true,
+      "symmetric": true,
       "property": [
         [ "prop", "field" ]
       ]
