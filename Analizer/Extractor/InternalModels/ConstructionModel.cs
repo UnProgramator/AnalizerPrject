@@ -11,7 +11,7 @@ class ConstructionModel : AnalizerModel
         entitiesQuickIndex = new Dictionary<string, int>(entityCount);
     }
 
-    public void addRelation(string entity1, string entity2, KeyValuePair<string, dynamic> relation)
+    public void addRelation(string entity1, string entity2, KeyValuePair<string, dynamic> relation, bool symmetric = false)
     {
         if (!entitiesQuickIndex.ContainsKey(entity1))
             throw new EntityUsedButNotDeclaredException($"Entity {entity1} not declared prior to adding relation implication");
@@ -22,7 +22,7 @@ class ConstructionModel : AnalizerModel
         int index1 = entitiesQuickIndex[entity1];
         int index2 = entitiesQuickIndex[entity2];
 
-        addRelation(index1, index2, relation);
+        addRelation(index1, index2, relation, symmetric);
     }
 
     public override void addEntity(string name, Dictionary<string, dynamic>? properties = null)

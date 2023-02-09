@@ -17,8 +17,7 @@ internal class CochangeExtractor
         {
             try
             {
-                model.addRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("cochanges", iter.relations));
-                model.addRelation(iter.Target, iter.Source, new KeyValuePair<string, dynamic>("cochanges", iter.relations));
+                model.addRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("cochanges", iter.relations), true);
             }
             catch (EntityUsedButNotDeclaredException) { }
         }
@@ -34,8 +33,7 @@ internal class CochangeExtractor
         foreach (var iter in input)
         {
             try { 
-            model.addRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("cochanges_100", iter.relations));
-            model.addRelation(iter.Target, iter.Source, new KeyValuePair<string, dynamic>("cochanges_100", iter.relations));
+            model.addRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("cochanges_100", iter.relations), true);
             }
             catch (EntityUsedButNotDeclaredException) { }
         }

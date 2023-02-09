@@ -43,12 +43,15 @@ class AnalizerModel
         lastIndex = 0;
     }
 
-    public void addRelation(int index1, int index2, KeyValuePair<string,dynamic> relation)
+    public void addRelation(int index1, int index2, KeyValuePair<string,dynamic> relation, bool symmtric = false)
     {
         if (Relations[index1, index2] is null)
             Relations[index1, index2] = new EntitiesRelations(relation);
         else
             Relations[index1, index2].addProperty(relation);
+
+        if (symmtric)
+            addRelation(index2, index1, relation, false);
     }
 
     public virtual void addEntity(string name, Dictionary<string, dynamic>? properties = null)
