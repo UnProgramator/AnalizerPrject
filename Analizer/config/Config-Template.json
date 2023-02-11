@@ -28,14 +28,22 @@
       "ignore-root": true,
       "file": "file-path-relative-to-root",
       "property": [
-        [ "prop", "field" ]
+        {
+          "property": "property-name",
+          "field": "field-name",
+          "condition": "condition"
+        }
       ]
     },
     "x-entity-property": {
       "file": "file-path-relative-to-root",
       "entity": "field",
       "property": [
-        [ "prop", "field" ]
+        {
+          "property": "property-name",
+          "field": "field-name",
+          "condition": "condition"
+        }
       ]
     },
     "x-relation": {
@@ -44,13 +52,21 @@
       "row": "field",
       "symmetric": true,
       "property": [
-        [ "prop", "field" ]
+        {
+          "property": "property-name",
+          "field": "field-name",
+          "condition": "condition"
+        }
       ]
     },
     "x-project-property": {
       "file": "file-path-relative-to-root",
       "property": [
-        [ "prop", "field" ]
+        {
+          "property": "property-name",
+          "field": "field-name",
+          "condition": "condition"
+        }
       ]
     }
   }

@@ -1,4 +1,5 @@
 ﻿using DRSTool.CommonModels;
+using DRSTool.Extractor.DataExtraction.Utils;
 using DRSTool.FileHelper;
 
 namespace DRSTool.Extractor.DataExtraction
@@ -23,12 +24,13 @@ namespace DRSTool.Extractor.DataExtraction
         {
             this.Root = root;
             this.Model = model;
+            this.fieldChecker = new FieldChecker();
         }
 
         protected virtual void extractRelation(Dictionary<string, object> details)
         {
             string filePath = extractFilePath(details);
-            Dictionary<string, string> properties = (Dictionary<string, string>)details["property"];
+            Dictionary<string, string>[] properties = (Dictionary<string, string>[])details["property"];
             bool symmetric = details.ContainsKey("symmetric") && (bool)details["symmetric"];
 
             string entity1_field = (string)details["row"];
@@ -46,9 +48,11 @@ namespace DRSTool.Extractor.DataExtraction
                 string entity1 = (string)relation[entity1_field];
                 string entity2 = (string)relation[entity2_field];
 
-                foreach(var propName in properties.Keys)
+                foreach (var propName in properties)
                 {
-                    Model.addRelation(entity1, entity2, new KeyValuePair<string, dynamic>(propName, relation[properties[propName]]), symmetric);
+                    var rel = getProperty(propName, relation);
+                    if(rel != null)
+                        Model.addRelation(entity1, entity2, (KeyValuePair<string, dynamic>)rel, symmetric);
                 }
             }
         }
@@ -56,7 +60,7 @@ namespace DRSTool.Extractor.DataExtraction
         protected virtual void extractEntityProperty(Dictionary<string, object> details)
         {
             string filePath = extractFilePath(details);
-            Dictionary<string, string> properties = (Dictionary<string, string>)details["property"];
+            Dictionary<string, string>[] properties = (Dictionary<string, string>[])details["property"];
             string entity_field = (string)details["entity"];
 
             var fileHelper = new FileHelperFactory().getFileHelper(filePath);
@@ -66,13 +70,15 @@ namespace DRSTool.Extractor.DataExtraction
             if (content == null)
                 throw new Exception($"could not read file {filePath} or error at extraction using {fileHelper.GetType().Name}");
 
-            foreach (Dictionary<string, object> property in content)
+            foreach (Dictionary<string, object> relation in content)
             {
-                string entity = (string)property[entity_field];
+                string entity = (string)relation[entity_field];
 
-                foreach (var propName in properties.Keys)
+                foreach (var property in properties)
                 {
-                    Model.addEntityProperty(entity, new KeyValuePair<string, dynamic>(propName, property[properties[propName]]));
+                    var rel = getProperty(property, relation);
+                    if(rel != null)
+                        Model.addEntityProperty(entity, (KeyValuePair<string, dynamic>)rel);
                 }
             }
         }
@@ -87,7 +93,19 @@ namespace DRSTool.Extractor.DataExtraction
             return filePath;
         }
 
+        private KeyValuePair<string, dynamic>? getProperty(Dictionary<string, string> property, Dictionary<string, object> relation)
+        {
+            var value = relation[property["field"]];
+
+            if(!property.ContainsKey("condition") || fieldChecker.checkCondition(value, property["condition"]))
+                return new KeyValuePair<string, dynamic>(property["property"], value);
+
+            return null;
+        }
+
         protected string Root { get; }
         protected AnalizerModel Model { get; }
+
+        private FieldChecker fieldChecker;
     }
 }
