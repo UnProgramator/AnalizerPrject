@@ -85,12 +85,7 @@ namespace DRSTool.Extractor.DataExtraction
 
         protected virtual string extractFilePath(Dictionary<string, object> details)
         {
-            string filePath = (string)details["file"];
-
-            if (!details.ContainsKey("ignore-root") || !(bool)details["ignore-root"])
-                filePath = Root + filePath;
-
-            return filePath;
+            return FileUtilities.getFileFromDefaultConfig(Root, details);
         }
 
         private KeyValuePair<string, dynamic>? getProperty(Dictionary<string, string> property, Dictionary<string, object> relation)

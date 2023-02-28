@@ -1,0 +1,22 @@
+﻿{
+  "OutputFile": {
+    "file": "D:\\Scoala\\Poli\\DXWorks\\results\\cassandra\\analizer\\outfile",
+    "format": ".json"
+  },
+  "DefaultInput": true,
+  "Root": "D:\\Scoala\\Poli\\DXWorks\\results\\cassandra\\dx\\",
+  "Input": {
+    "struct": "+struct-results\\+tuning\\files-processed-cassandra.csv",
+
+    "cochange_number": "+dx-results\\relations\\chronos1\\Temporal-Commits\\files-Temporal_Coupling_Commits.csv",
+    "cochange_percent": "+dx-results\\relations\\chronos1\\Temporal-Commits\\files-Temporal_Coupling_Percentage_Commits.csv",
+    "jafax_layout": {
+      "ignore-root": true,
+      "file": "D:\\Scoala\\Poli\\DXWorks\\results\\cassandra\\cassandra-voyager-results\\jafax\\results\\cassandra-layout.json"
+    }
+  },
+
+  "comentary": {
+    "hierarchy": "+dx-results\\relations\\chronos1\\Structural\\files-Hierarchy_Specific_Relations.csv"
+  }
+}

@@ -30,31 +30,36 @@ class Extractor
 
     private void parseInput()
     {
-        
-
         var input = config.Input;
 
         foreach (var inputType in input.Keys)
         {
-            if (inputType.Equals("struct")) // ignore the struct propert. Already used
+            if (inputType.Equals("struct")) // ignore the struct propert. Already extracted in constructor
                 continue;
-            if (input[inputType] is Dictionary<string, object>)
-                gde.extract(inputType, (Dictionary<string, object>)input[inputType]);
-            else if (input[inputType] is not string)
-                throw new Exception($"Invalid field {inputType}, having type {input[inputType].GetType().Name}");
+
+            string path;
+
             switch (inputType)
             {
                 case "hierarchy":
-                    HierarchyExtractor.extract(model, config.root + "/" + config.Input["hierarchy"]);
+                    path = FileUtilities.getFileFromDefaultConfig(config.root, config.Input["hierarchy"]);
+                    HierarchyExtractor.extract(model, path);
+                    break;
+                case "jafax_layout":
+                    path = FileUtilities.getFileFromDefaultConfig(config.root, config.Input["jafax_layout"]);
+                    JafaxLayoutExtraction.extract(model, path, "cassandra/");
                     break;
                 case "cochange_number":
-                    CochangeExtractor.extract_number(model, config.root + "/" + config.Input["cochange_number"]);
+                    path = FileUtilities.getFileFromDefaultConfig(config.root, config.Input["cochange_number"]);
+                    CochangeExtractor.extract_number(model, path);
                     break;
                 case "cochange_percent":
-                    CochangeExtractor.extract_percentage(model, config.root + "/" + config.Input["cochange_percent"]);
+                    path = FileUtilities.getFileFromDefaultConfig(config.root, config.Input["cochange_percent"]);
+                    CochangeExtractor.extract_percentage(model, path);
                     break;
                 default:
-                    throw new Exception($"Invalid field {inputType}, having type {input[inputType].GetType().Name}, but no such type is implemented");
+                    gde.extract(inputType, (Dictionary<string, object>)input[inputType]);
+                    break;
             }
         }
         
