@@ -15,6 +15,7 @@ class EntityModel
     [Name("#Changes")]
     public long Changes { get; set; } = 0;
 
+    public string Component { get; set; } = "";
     public override string ToString()
     {
         return PackageName + " -> " + Filename + " = " + Extension;

@@ -40,6 +40,7 @@ class EntitiesExtractor
             
             if (file.Module != null) properties.Add("module", file.Module);
             if (file.PackageName != null)  properties.Add("package", file.PackageName);
+            if (file.Component != null)  properties.Add("component", file.Component);
 
             analizerModel.addEntity(file.RawPath + "/" + file.Filename, properties);
         }
