@@ -28,7 +28,7 @@ internal class FileHelperFactory
 
         switch (fileExtension)
         {
-            case "csv":
+            case ".csv":
                 return getCsvHelper();
             case ".json":
                 return getJsonHelper();

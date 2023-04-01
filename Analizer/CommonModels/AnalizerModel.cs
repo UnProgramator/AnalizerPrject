@@ -6,7 +6,8 @@ class AnalizerModel
 {
     public string[] Properties { get; private set; }
     public EntityInformation[] Entities { get; private set; }
-    public EntitiesRelations[,] Relations { get; private set; }
+    public EntitiesRelations[,] SRelations { get; private set; }
+    public EntitiesRelations[,] HRelations { get; private set; }
 
     private int entityCount;
 
@@ -19,24 +20,17 @@ class AnalizerModel
     private AnalizerModel() { }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-    public AnalizerModel(int entityCount, string[] properties)
+    public AnalizerModel(int entityCount, string[] properties): this(entityCount, properties, new EntityInformation[entityCount])
     {
-        Entities = new EntityInformation[entityCount];
-
-        Relations = new EntitiesRelations[entityCount,entityCount];
-
-        Properties = properties;
-
-        this.entityCount = entityCount;
-
-        lastIndex = 0;
     }
 
     protected AnalizerModel(int entityCount, string[] properties, EntityInformation[] entities)
     {
         Entities = entities;
 
-        Relations = new EntitiesRelations[entityCount, entityCount];
+        SRelations = new EntitiesRelations[entityCount, entityCount];
+
+        HRelations = new EntitiesRelations[entityCount, entityCount];
 
         Properties = properties;
 
@@ -53,23 +47,44 @@ class AnalizerModel
         lastIndex++;
     }
 
-    public void addRelation(int index1, int index2, KeyValuePair<string,dynamic> relation, bool symmtric = false)
+
+
+    public void addStructuralRelation(int index1, int index2, KeyValuePair<string,dynamic> relation, bool symmtric = false)
     {
-        if (Relations[index1, index2] is null)
-            Relations[index1, index2] = new EntitiesRelations(relation);
+        if (SRelations[index1, index2] is null)
+            SRelations[index1, index2] = new EntitiesRelations(relation);
         else
-            Relations[index1, index2].addProperty(relation);
+            SRelations[index1, index2].addProperty(relation);
 
         if (symmtric)
-            addRelation(index2, index1, relation, false);
+            addStructuralRelation(index2, index1, relation, false);
     }
 
-    public void addRelation(string entity1, string entity2, KeyValuePair<string, dynamic> relation, bool symmtric = false)
+    public void addStructuralRelation(string entity1, string entity2, KeyValuePair<string, dynamic> relation, bool symmtric = false)
     {
         int index1 = getIndexForEntity(entity1);
         int index2 = getIndexForEntity(entity2);
 
-        addRelation(index1, index2, relation, symmtric);
+        addStructuralRelation(index1, index2, relation, symmtric);
+    }
+
+    public void addHistoryRelation(int index1, int index2, KeyValuePair<string,dynamic> relation, bool symmtric = false)
+    {
+        if (HRelations[index1, index2] is null)
+            HRelations[index1, index2] = new EntitiesRelations(relation);
+        else
+            HRelations[index1, index2].addProperty(relation);
+
+        if (symmtric)
+            addHistoryRelation(index2, index1, relation, false);
+    }
+
+    public void addHistoryRelation(string entity1, string entity2, KeyValuePair<string, dynamic> relation, bool symmtric = false)
+    {
+        int index1 = getIndexForEntity(entity1);
+        int index2 = getIndexForEntity(entity2);
+
+        addHistoryRelation(index1, index2, relation, symmtric);
     }
 
     public void addEntityProperty(int entityIndex, KeyValuePair<string, dynamic> property)
@@ -99,7 +114,7 @@ class AnalizerModel
 
         newObject.Properties = Properties;
         newObject.Entities = Entities;
-        newObject.Relations = Relations;
+        newObject.SRelations = SRelations;
         newObject.entityCount = entityCount;
         newObject.lastIndex = entityCount;
 
@@ -109,21 +124,36 @@ class AnalizerModel
     public AnalizerCompresedModel compress()
     {
         AnalizerCompresedModel compresedModel = new AnalizerCompresedModel(entityCount, Properties, Entities);
+
         for (int i = 0; i < entityCount; i++)
             for (int j = 0; j < entityCount; j++)
-                if (Relations[i, j] != null)
-                    compresedModel.Relations.Add(Tuple.Create(i, j), Relations[i, j]);
+                if (SRelations[i, j] != null)
+                    compresedModel.StrucutralRelations.Add(Tuple.Create(i, j), SRelations[i, j]);
+
+        for (int i = 0; i < entityCount; i++)
+            for (int j = 0; j < entityCount; j++)
+                if (HRelations[i, j] != null)
+                    compresedModel.HistoryRelations.Add(Tuple.Create(i, j), HRelations[i, j]);
+
         return compresedModel;
     }
 
     public static AnalizerModel decompress(AnalizerCompresedModel compressedModel)
     {
         AnalizerModel model = new AnalizerModel(compressedModel.entityCount, compressedModel.Properties, compressedModel.Entities);
-        foreach(var x in compressedModel.Relations)
+
+        foreach(var x in compressedModel.StrucutralRelations)
         {
             int i = x.Key.Item1;
             int j = x.Key.Item2;
-            model.Relations[i, j] = x.Value;
+            model.SRelations[i, j] = x.Value;
+        }
+
+        foreach (var x in compressedModel.HistoryRelations)
+        {
+            int i = x.Key.Item1;
+            int j = x.Key.Item2;
+            model.HRelations[i, j] = x.Value;
         }
 
         return model;

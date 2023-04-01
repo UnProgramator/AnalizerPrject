@@ -15,14 +15,14 @@ class HierarchyExtractor
 
         foreach(var iter in input)
         {
-            model.addRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("inheritance", true));
+            model.addStructuralRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("inheritance", true));
         }
     }
 }
 
 internal class HierarchyModel
 {
-    //source,target,Hierarchy-Specific Relations
+    //source,target,Hierarchy-Specific SRelations
 
     [Name("source")]
     public string Source { get; set; } = "";

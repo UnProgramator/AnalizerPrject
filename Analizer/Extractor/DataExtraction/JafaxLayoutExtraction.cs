@@ -37,14 +37,14 @@ class JafaxLayoutExtraction
             {
                 long id = (long)x["superClass"];
                 string superName = entitesJafaxIdToName[id]; 
-                model.addRelation(thisName, superName, new KeyValuePair<string, dynamic>("inheritance", true));
+                model.addStructuralRelation(thisName, superName, new KeyValuePair<string, dynamic>("inheritance", true));
             }
             if (x.ContainsKey("interfaces"))
             {
                 foreach(long id in (long[])x["interfaces"])
                 {
                     string interName = entitesJafaxIdToName[id];
-                    model.addRelation(thisName, interName, new KeyValuePair<string, dynamic>("inheritance", true));
+                    model.addStructuralRelation(thisName, interName, new KeyValuePair<string, dynamic>("inheritance", true));
                 }
             }
         }

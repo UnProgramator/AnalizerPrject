@@ -18,7 +18,7 @@ internal class CochangeExtractor
         {
             try
             {
-                model.addRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("cochanges", iter.relations), true);
+                model.addHistoryRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("cochanges", iter.relations), true);
             }
             catch (EntityUsedButNotDeclaredException) { }
         }
@@ -34,7 +34,7 @@ internal class CochangeExtractor
         foreach (var iter in input)
         {
             try { 
-            model.addRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("cochanges_100", iter.relations), true);
+            model.addHistoryRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("cochanges_%", iter.relations), true);
             }
             catch (EntityUsedButNotDeclaredException) { }
         }
@@ -43,7 +43,7 @@ internal class CochangeExtractor
 
 internal class CochangeModel
 {
-    //source,target,Hierarchy-Specific Relations
+    //source,target,Hierarchy-Specific SRelations
 
     [Name("source")]
     public string Source { get; set; } = "";
@@ -57,7 +57,7 @@ internal class CochangeModel
 
 internal class CochangePercentageModel
 {
-    //source,target,Hierarchy-Specific Relations
+    //source,target,Hierarchy-Specific SRelations
 
     [Name("source")]
     public string Source { get; set; } = "";

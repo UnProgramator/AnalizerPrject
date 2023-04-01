@@ -6,15 +6,19 @@ namespace DRSTool.Extractor.DataExtraction
 {
     class GenericDataExtraction
     {
-        public virtual void extract(string name, Dictionary<string, object> details)
+        public virtual void extract(string name, dynamic details)
         {
-            if (name.EndsWith("-relation"))
+            if (name.EndsWith("-srelation"))
             {
-                extractEntityProperty(details);
+                extractRelation(details);
+            }
+            else if (name.EndsWith("-hrelation"))
+            {
+                throw new NotImplementedException();
             }
             else if (name.EndsWith("-entity-property"))
             {
-                extractRelation(details);
+                extractEntityProperty(details);
             }
             else
                 throw new Exception($"Incorrect property name {name}");
@@ -27,10 +31,10 @@ namespace DRSTool.Extractor.DataExtraction
             this.fieldChecker = new FieldChecker();
         }
 
-        protected virtual void extractRelation(Dictionary<string, object> details)
+        protected virtual void extractRelation(dynamic details)
         {
             string filePath = extractFilePath(details);
-            Dictionary<string, string>[] properties = (Dictionary<string, string>[])details["property"];
+            dynamic properties = details["property"];
             bool symmetric = details.ContainsKey("symmetric") && (bool)details["symmetric"];
 
             string entity1_field = (string)details["row"];
@@ -43,7 +47,7 @@ namespace DRSTool.Extractor.DataExtraction
             if (content == null)
                 throw new Exception($"could not read file {filePath} or error at extraction using {fileHelper.GetType().Name}");
 
-            foreach (Dictionary<string, object> relation in content)
+            foreach (IDictionary<string, object> relation in content)
             {
                 string entity1 = (string)relation[entity1_field];
                 string entity2 = (string)relation[entity2_field];
@@ -51,16 +55,16 @@ namespace DRSTool.Extractor.DataExtraction
                 foreach (var propName in properties)
                 {
                     var rel = getProperty(propName, relation);
-                    if(rel != null)
-                        Model.addRelation(entity1, entity2, (KeyValuePair<string, dynamic>)rel, symmetric);
+                    if(rel is not null)
+                        Model.addStructuralRelation(entity1, entity2, (KeyValuePair<string, dynamic>)rel, symmetric);
                 }
             }
         }
 
-        protected virtual void extractEntityProperty(Dictionary<string, object> details)
+        protected virtual void extractEntityProperty(dynamic details)
         {
             string filePath = extractFilePath(details);
-            Dictionary<string, string>[] properties = (Dictionary<string, string>[])details["property"];
+            dynamic properties = details["property"];
             string entity_field = (string)details["entity"];
 
             var fileHelper = new FileHelperFactory().getFileHelper(filePath);
@@ -70,7 +74,7 @@ namespace DRSTool.Extractor.DataExtraction
             if (content == null)
                 throw new Exception($"could not read file {filePath} or error at extraction using {fileHelper.GetType().Name}");
 
-            foreach (Dictionary<string, object> relation in content)
+            foreach (IDictionary<string, object> relation in content)
             {
                 string entity = (string)relation[entity_field];
 
@@ -78,22 +82,23 @@ namespace DRSTool.Extractor.DataExtraction
                 {
                     var rel = getProperty(property, relation);
                     if(rel != null)
-                        Model.addEntityProperty(entity, (KeyValuePair<string, dynamic>)rel);
+                        Model.addEntityProperty((string)entity, (KeyValuePair<string, dynamic>)rel);
                 }
             }
         }
 
-        protected virtual string extractFilePath(Dictionary<string, object> details)
+        protected virtual string extractFilePath(dynamic details)
         {
             return FileUtilities.getFileFromDefaultConfig(Root, details);
         }
 
-        private KeyValuePair<string, dynamic>? getProperty(Dictionary<string, string> property, Dictionary<string, object> relation)
+        private KeyValuePair<string, object>? getProperty(dynamic property, IDictionary<string, object> relation)
         {
-            var value = relation[property["field"]];
+            string field = (string)property["field"];
+            var value = relation[field];
 
             if(!property.ContainsKey("condition") || fieldChecker.checkCondition(value, property["condition"]))
-                return new KeyValuePair<string, dynamic>(property["property"], value);
+                return new KeyValuePair<string, object>((string)property["property"], value);
 
             return null;
         }
