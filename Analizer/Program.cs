@@ -8,9 +8,10 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        var model = new Extractor.Extractor().model;
+        var extractor = new Extractor.Extractor();
+        extractor.save();
 
-        var analizer = new Analizer.Analizer(model);
+        var analizer = new Analizer.Analizer(extractor.model);
         analizer.analize();
         analizer.saveResults();
 

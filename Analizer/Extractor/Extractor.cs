@@ -9,7 +9,7 @@ class Extractor
 {
     public Extractor() {
 
-        var confVal = ConfigValidator.getCofigForDefaultLocation();
+        var confVal = new ConfigValidator("config/AnalizerConfig - Cassandra.json");
         config = confVal.config;
 
         if (!config.Input.ContainsKey("struct"))
@@ -58,7 +58,7 @@ class Extractor
                     CochangeExtractor.extract_percentage(model, path);
                     break;
                 default:
-                    gde.extract(inputType, (Dictionary<string, object>)input[inputType]);
+                    gde.extract(inputType, input[inputType]);
                     break;
             }
         }

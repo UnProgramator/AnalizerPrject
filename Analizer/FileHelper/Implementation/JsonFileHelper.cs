@@ -24,12 +24,12 @@ class JsonFileHelper : IFileHelper
         return content;
     }
 
-    public Dictionary<string, object>[]? getContentAsDictArray(string filename)
+    public IEnumerable<Dictionary<string, object>>? getContentAsDictArray(string filename)
     {
         Dictionary<string, object>[]? content;
         var _file = File.OpenText(filename);
         JsonSerializer serializer = new JsonSerializer();
-        content = (Dictionary<string, object>[]?)serializer.Deserialize(_file, typeof(Dictionary<string, object>[]));
+        content = (Dictionary<string, object>[]?)serializer.Deserialize(_file, typeof(IEnumerable<Dictionary<string, object>>));
 
         return content;
     }

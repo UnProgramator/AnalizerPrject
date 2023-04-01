@@ -133,8 +133,8 @@ class FieldChecker
             case NO + IN:
             case BE:
             case NO + BE:
-                var stIdx = conditions.IndexOf("("); //starting index of the operands
-                var len = conditions.LastIndexOf(")") - stIdx - 1; // the length between the two "()" without the parathesis
+                var stIdx = conditions.IndexOf('(') + 1; //starting index of the operands, next index after "("
+                var len = conditions.LastIndexOf(')') - stIdx; // the length between the two "()", without the parathesis
                 var opsL = conditions.Substring(stIdx, len).Trim();
                 operands = opsL.Split(',').Select(e => e.Trim()).ToArray(); //split then trim
                 break;

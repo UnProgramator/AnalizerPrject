@@ -35,18 +35,17 @@ class CsvFileHelper : IFileHelper
         return content;
     }
 
-    public Dictionary<string, object>[]? getContentAsDictArray(string filename)
+    public IEnumerable<Dictionary<string, object>>? getContentAsDictArray(string filename)
     {
-        Dictionary<string, object>[]? content;
-        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            HasHeaderRecord = true,
-        };
-        var reader = new StreamReader(filename);
-        var csv = new CsvReader(reader, config);
-        content = csv.GetRecord<Dictionary<string, object>[]?>();
+        //var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        //{
+        //    HasHeaderRecord = true,
+        //};
+        //var reader = new StreamReader(filename);
+        //var csv = new CsvReader(reader, config);
+        //var content = csv.GetRecords<Dictionary<string, object>>
 
-        return content;
+        return getArrayContent<Dictionary<string, object>>(filename);
     }
 
     public Dictionary<string, object>? getContentAsDict(string filename)

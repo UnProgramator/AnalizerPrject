@@ -46,7 +46,7 @@
         }
       ]
     },
-    "x-relation": {
+    "x-srelation": { "or": "x-hrelation", "in": "the case of history-specific relations"
       "file": "file-path-relative-to-root",
       "column": "field",
       "row": "field",
