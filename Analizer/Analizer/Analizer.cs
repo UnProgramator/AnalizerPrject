@@ -2,6 +2,7 @@
 using DRSTool.CommonModels;
 using DRSTool.Analizer.AntipatternsDetection;
 using DRSTool.Analizer.Models;
+using DRSTool.Analizer.AntipatternsDetection.Implementations;
 
 namespace DRSTool.Analizer;
 
@@ -44,9 +45,9 @@ class Analizer
         //interfaces/bases change togheter with thir derived
         for (int i = 0; i < model.Entities.Length; i++)
             for (int j = 0; j < model.Entities.Length; j++)
-                if (model.Relations[i, j] != null)
+                if (model.SRelations[i, j] != null)
                 {
-                    var rel = model.Relations[i, j].Properties;
+                    var rel = model.SRelations[i, j].Properties;
                     if (!rel.ContainsKey("inheritance")) continue;
                     if (!rel.ContainsKey("cochanges")) continue;
                     if (rel["cochanges"] < 4) continue;

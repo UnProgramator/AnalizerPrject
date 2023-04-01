@@ -8,7 +8,8 @@ namespace DRSTool.Analizer.Models
 {
     class ResultModel
     {
-        private Dictionary<string, List<Dictionary<string, object>>> results;
+        public Dictionary<string, List<Dictionary<string, object>>> results { private set; get; }
+
 
         public ResultModel()
         {
