@@ -10,6 +10,6 @@ namespace DRSTool.Analizer.AntipatternsDetection.Config
     {
         public int StructImpact { get; set; }
         public int HistoryImpact { get; set; }
-        public int change { get; set; }
+        public int cochange { get; set; }
     }
 }
