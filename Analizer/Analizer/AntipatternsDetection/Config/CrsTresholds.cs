@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DRSTool.Analizer.AntipatternsDetection.Config
 {
-    internal class CrsTresholds
+    class CrsTresholds
     {
+        public int cochange { get; set; }
+        public int crossing { get; set; }
     }
 }
