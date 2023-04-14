@@ -71,6 +71,8 @@ class UnstableInterfaceDetection : IAntipatternDetector
         where:
 		    Fset_S: set of file in relation with the current file
 		    Fset_H: files evolutionay coupled, where cochanges(fk, f) > cochange[thr])
+
+      [after Ran Mo at al., "Architecture Anti-Patterns: Automatically Detectable Violations of Design Principles", 3.2]
      */
 }
 
