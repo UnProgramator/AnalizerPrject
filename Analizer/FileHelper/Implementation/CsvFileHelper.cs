@@ -66,7 +66,7 @@ class CsvFileHelper : IFileHelper
         using (var writer = new StreamWriter(filename))
         using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
         {
-            if (content is not IEnumerable)
+            if (content is IEnumerable)
                 csv.WriteRecords((IEnumerable)content);
             else
                 csv.WriteRecord(content);
