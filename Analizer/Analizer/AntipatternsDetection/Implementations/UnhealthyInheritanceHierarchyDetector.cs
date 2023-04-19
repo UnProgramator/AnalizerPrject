@@ -43,14 +43,11 @@ internal class UnhealthyInheritanceHierarchyDetector : IAntipatternDetector
 
                 if (!tree.inherits(d, b)) continue; // check for indirect inheritance
 
-                var _base = dataModel.Entities[b].Name;
-
                 var value = new Dictionary<string, object> {
-                    { "antipattern-type", "unhealthy-inheritance" },
                     { "type", "base-depends-on-derived" }
                 };
 
-                results.add(_base, value);
+                results.add(b, "unhealthy-inheritance", value);
 
                 break; // there may be problems if it is the case a base depends on multiple deriveds. If ti depends on one or on more is the same
             } 
@@ -80,22 +77,32 @@ internal class UnhealthyInheritanceHierarchyDetector : IAntipatternDetector
                     var _derived = dataModel.Entities[d].Name;
 
                     var value_base = new Dictionary<string, object> {
-                        { "antipattern-type", "unhealthy-inheritance" },
                         { "type", "class-depends-on-base-and-derived" },
+                        { "participant", "base" },
+                        { "class", _class },
+                        { "derived-class", _derived }
+                    };
+
+                    results.add(b, "unhealthy-inheritance", value_base);
+
+                    var value_derived = new Dictionary<string, object> {
+                        { "type", "class-depends-on-base-and-derived" },
+                        { "participant", "derived" },
                         { "class", _class }
                     };
 
-                    results.add(_base, value_base);
+                    results.add(d, "unhealthy-inheritance", value_derived);
 
                     var value_class = new Dictionary<string, object> {
-                        { "antipattern-type", "unhealthy-inheritance" },
                         { "type", "class-depends-on-base-and-derived" },
-                        { "base-class", _base }
+                        { "participant", "class" },
+                        { "base-class", _base },
+                        { "derived-class", _derived }
                     };
 
-                    results.add(_class, value_class);
+                    results.add(c, "unhealthy-inheritance", value_class);
 
-                    break; //it's enough if it occured for a derived of the analized base class
+                    //break; //it's enough if it occured for a derived of the analized base class
                 }
             }
         }

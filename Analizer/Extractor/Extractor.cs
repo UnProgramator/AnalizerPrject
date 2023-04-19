@@ -9,7 +9,7 @@ class Extractor
 {
     public Extractor() {
 
-        var confVal = new ConfigValidator("config/AnalizerConfig - Cassandra.json");
+        var confVal = new ConfigValidator("config/AnalizerConfig - Argouml.json");
         config = confVal.config;
 
         if (!config.Input.ContainsKey("struct"))
@@ -18,6 +18,9 @@ class Extractor
         model = EntitiesExtractor.CreateConstructionModel(config.root + (string)config.Input["struct"]);
 
         gde = new GenericDataExtraction(config.root, model);
+
+        CodeCoverageExtraction.createInstance(config.root);
+        TestResultExtraction.createInstance(config.root);
 
         parseInput();
     }
@@ -56,6 +59,12 @@ class Extractor
                 case "cochange_percent":
                     path = FileUtilities.getFileFromDefaultConfig(config.root, config.Input["cochange_percent"]);
                     CochangeExtractor.extract_percentage(model, path);
+                    break;
+                case "test_results":
+                    TestResultExtraction.getInstance().extract(model, config.Input["test_results"]);
+                    break;
+                case "code_coverage":
+                    CodeCoverageExtraction.getInstance().extract(model, config.Input["code_coverage"]);
                     break;
                 default:
                     gde.extract(inputType, input[inputType]);

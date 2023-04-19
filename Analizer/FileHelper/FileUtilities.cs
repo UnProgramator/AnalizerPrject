@@ -32,8 +32,7 @@ class FileUtilities
                     if (value)
                         return (string)config["file"];
                 }
-                else
-                    return root + (string)config["file"];
+                return root + (string)config["file"];
             }
             catch(InvalidCastException)
             {

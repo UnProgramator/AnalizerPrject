@@ -4,12 +4,12 @@ namespace DRSTool.FileHelper;
 
 internal class FileHelperFactory
 {
-    public CsvFileHelper getCsvHelper()
+    public IFileHelper getCsvHelper()
     {
         return CsvFileHelper.getInstance();
     }
 
-    public JsonFileHelper getJsonHelper()
+    public IFileHelper getJsonHelper()
     {
         return JsonFileHelper.getInstance();
     }

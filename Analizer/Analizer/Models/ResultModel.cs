@@ -1,27 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DRSTool.CommonModels;
+using System.Security.Cryptography;
 
-namespace DRSTool.Analizer.Models
+namespace DRSTool.Analizer.Models;
+
+class ResultModel
 {
-    class ResultModel
+    ResultEntityModel[] resultEntity;
+
+    private ResultModel(AnalizerModel model)
     {
-        public Dictionary<string, List<Dictionary<string, object>>> results { private set; get; }
-
-
-        public ResultModel()
+        resultEntity = new ResultEntityModel[model.entityCount];
+        int i = 0;
+        foreach (var res in model.Entities)
         {
-            results = new Dictionary<string, List<Dictionary<string, object>>>();
+            resultEntity[i++] = ResultEntityModel.fromBase(res);
         }
+    }
 
-        public void add(string entityKey, Dictionary<string, object> value)
-        {
-            if (results.ContainsKey(entityKey))
-                results[entityKey].Add(value);
-            else
-                results.Add(entityKey, new List<Dictionary<string, object>> { value });
-        }
+    public static ResultModel fromExtractorModel(AnalizerModel model) => new ResultModel(model);
+
+    public void add(int entityID, string antipatternName, Dictionary<string, object> value)
+    {
+        if (resultEntity[entityID].antipatterns.ContainsKey(antipatternName))
+            resultEntity[entityID].antipatterns[antipatternName].Add(value);
+        else
+            resultEntity[entityID].antipatterns.Add(antipatternName, new List<Dictionary<string, object>> { value });
     }
 }

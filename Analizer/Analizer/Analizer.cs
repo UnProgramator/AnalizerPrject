@@ -13,24 +13,15 @@ class Analizer
     private ResultModel results;
 
 
-    /// <summary>
-    /// to be used only internaly, do not forget to initialize the field "model"
-    /// </summary>
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-    private Analizer()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-    {
-        results = new ResultModel();
-    }
-
-    public Analizer(AnalizerModel model) : this()
+    public Analizer(AnalizerModel model)
     {
         if (model == null)
             throw new Exception("Model cannot be null");
         this.model = model;
+        results = ResultModel.fromExtractorModel(model);
     }
 
-    public Analizer(string modelFilePath) : this()
+    public Analizer(string modelFilePath)
     {
         AnalizerCompresedModel? cm = new FileHelperFactory().getFileHelper(modelFilePath).getContent<AnalizerCompresedModel>(modelFilePath);
 
@@ -38,27 +29,16 @@ class Analizer
             throw new Exception("File model could not be read");
 
         model = AnalizerModel.decompress(cm);
+        results = ResultModel.fromExtractorModel(model);
     }
 
     public void analize()
     {
-        //interfaces/bases change togheter with thir derived
-        for (int i = 0; i < model.Entities.Length; i++)
-            for (int j = 0; j < model.Entities.Length; j++)
-                if (model.SRelations[i, j] != null)
-                {
-                    var rel = model.SRelations[i, j].Properties;
-                    if (!rel.ContainsKey("inheritance")) continue;
-                    if (!rel.ContainsKey("cochanges")) continue;
-                    if (rel["cochanges"] < 4) continue;
-                    results.add(model.Entities[i].Name, new Dictionary<string, object>
-                                                        { { "antipattern-type", "base and derived change too often" },
-                                                          { "class", model.Entities[j].Name },
-                                                          { "co-change times", rel["cochanges"] }
-                                                        });
-                }
-
         new UnstableInterfaceDetection().detect(model, results);
+        //new CliqueDetector().detect(model, results);
+        new CrossingDetector().detect(model, results);
+        new UnhealthyInheritanceHierarchyDetector().detect(model, results);
+        //new ModularityViolationGroupDetector().detect(model, results);
     }
 
     public void saveResults()

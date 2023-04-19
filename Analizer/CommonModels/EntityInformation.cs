@@ -2,9 +2,9 @@
 
 class EntityInformation
 {
-    public string Name { get; }
+    public string Name { get; protected set; }
 
-    public Dictionary<string, dynamic>? Properties { get; private set; } = null;
+    public Dictionary<string, dynamic>? Properties { get; protected set; } = null;
 
     public EntityInformation(string name, Dictionary<string, dynamic>? properties = null)
     {

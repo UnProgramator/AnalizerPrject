@@ -9,7 +9,7 @@ class AnalizerModel
     public EntitiesRelations[,] SRelations { get; private set; }
     public EntitiesRelations[,] HRelations { get; private set; }
 
-    private int entityCount;
+    public int entityCount { get; private set; }
 
     protected int lastIndex { private set; get; }
 

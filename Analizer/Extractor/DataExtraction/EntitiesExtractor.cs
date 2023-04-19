@@ -19,7 +19,8 @@ class EntitiesExtractor
         if (input == null)
             throw new Exception("Error during reading struct file");
 
-        input = input.Where(m => m.Extension.Equals("java")).OrderBy(m => m.PackageName).ThenBy(m => m.Filename);
+        input = input.Where(m => m.Extension.Equals("java"));
+        input = input.OrderBy(m => m.PackageName).ThenBy(m => m.Filename);
 
         //fore some reason, count remove the elements from the IEnumerable implementation
         //because of that, I converted it to an array
@@ -30,10 +31,14 @@ class EntitiesExtractor
 
         analizerModel = initModel(input.Count());
 
+        int i = 0;
+
         foreach (var file in input)
         {
             var properties = new Dictionary<string, dynamic>() {
+                { "index", i++ },
                 { "path", file.RawPath},
+                { "filename",  file.Filename},
                 { "LOC", file.LinesOfCode },
                 { "changes", file.Changes}
             };

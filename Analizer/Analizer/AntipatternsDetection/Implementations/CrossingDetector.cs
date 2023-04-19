@@ -26,14 +26,14 @@ internal class CrossingDetector : IAntipatternDetector
                 // fan in
                 if (dataModel.SRelations[crt, i] != null) // structural dependency with the class: curent class depends on i
                 {
-                    if (dataModel.HRelations[crt, i] != null && dataModel.HRelations[crt, i].Properties["cochange"] > tresholds.cochange)
+                    if (dataModel.HRelations[crt, i] != null && dataModel.HRelations[crt, i].Properties["cochanges"] > tresholds.cochange)
                         fanIn++;
                 }
 
                 //fan out
                 if (dataModel.SRelations[i, crt] != null) // structural dependency with the class: i depends on curent class
                 {
-                    if (dataModel.HRelations[i, crt] != null && dataModel.HRelations[i, crt].Properties["cochange"] > tresholds.cochange)
+                    if (dataModel.HRelations[i, crt] != null && dataModel.HRelations[i, crt].Properties["cochanges"] > tresholds.cochange)
                         fanOut++;
                 }
             }
@@ -43,12 +43,11 @@ internal class CrossingDetector : IAntipatternDetector
                 var entity = dataModel.Entities[crt].Name;
 
                 var value = new Dictionary<string, object> {
-                    { "antipattern-type", "crossing" },
                     { "fan-in", fanIn},
                     { "fan-out", fanOut}
                 };
 
-                results.add(entity, value);
+                results.add(crt, "crossing", value);
             }
         }
 

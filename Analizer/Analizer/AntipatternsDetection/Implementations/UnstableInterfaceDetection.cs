@@ -27,15 +27,13 @@ class UnstableInterfaceDetection : IAntipatternDetector
             if (Fset_S > tresholds.StructImpact 
                 && Fset_H_intersect_S >= tresholds.HistoryImpact)
             {
-                var entity = dataModel.Entities[i].Name;
 
                 var value = new Dictionary<string, object> {
-                    { "antipattern-type", "unstable-interface" },
                     { "denpendents-count", Fset_S},
                     { "dependents-cochanges", Fset_H_intersect_S}
                 };
 
-                results.add(entity, value);
+                results.add(i, "unstable-interface", value);
             }
         }
     }
@@ -46,16 +44,17 @@ class UnstableInterfaceDetection : IAntipatternDetector
 
         for (int j = 0; j < dataModel.Entities.Length; j++)
         {
-            if (dataModel.SRelations[j, sourceEntity] == null) continue; // no structural relation present
-
+            if (dataModel.SRelations[j, sourceEntity] is null) continue; // no structural relation present
 
             Fset_S++;
+
+            if (dataModel.HRelations[j, sourceEntity] is null) continue; // no evolution coupling present
 
             var rel = dataModel.HRelations[j, sourceEntity].Properties;
 
             if (rel.ContainsKey("cochanges") && rel["cochanges"] > tresholds.cochange)
             {
-                Fset_H_int_S += rel["cochanges"];
+                Fset_H_int_S ++;
             }
         }
 

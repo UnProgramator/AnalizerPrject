@@ -1,4 +1,6 @@
 ﻿using DRSTool.CommonModels;
+using DRSTool.FileHelper;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace DRSTool.Analizer.AntipatternsDetection.Utilities;
@@ -35,6 +37,9 @@ class InheritanceTree
         if (data == null)
             throw new Exception("Inheritance Tree used but not initialized!");
 
+        if(!data.ContainsKey(baseIdx))
+            return new SortedSet<int>();
+
         var childrens = data[baseIdx].childrens;
 
         return childrens != null ? childrens : new SortedSet<int>();
@@ -46,29 +51,36 @@ class InheritanceTree
             throw new Exception("Reinitialization atempt");
         data = new Dictionary<int, Node>();
 
-        for(int d=0; d<= source.Entities.Length; d++)
+        for(int d=0; d< source.Entities.Length; d++)
             for(int b=0; b< source.Entities.Length; b++)
                 if( source.SRelations[d, b] != null &&
                     source.SRelations[d, b].Properties.ContainsKey("inheritance"))
                 {
                     if (!data.ContainsKey(d))
-                        data.Add(d, new Node(b));
-                    data[d].addParent(b);
+                        data.Add(d, new Node(b, d));
+                    else
+                        data[d].addParent(b);
 
                     if(!data.ContainsKey(b))
-                        data.Add(b, new Node(null));
+                        data.Add(b, new Node(null, b));
                     data[b].addChildren(d); 
                 }
 
-        foreach((var key, var value) in data){
-            if (value.parents == null) // the update is from the root of the tree to the leaves.
+        //new FileHelperFactory().getJsonHelper().writeContent("D:\\Scoala\\Poli\\DXWorks\\results\\argouml\\analizer\\inherit.json", data);
+
+        foreach ((var key, var value) in data)
+        {
+            if (!value.isMerged) // the update is from the root of the tree to the leaves.
                 update(key);
         }
+
     }
+
+    private Stack<int> stackis = new Stack<int>();
 
     private void update(int index)
     {
-        if (data == null)
+         if (data == null)
             return;
 
         Node crt = data[index];
@@ -77,7 +89,12 @@ class InheritanceTree
             return;
 
         if (crt.childrens == null)
+        {
+            crt.isMerged = true;
             return;
+        }
+
+        stackis.Push(index);
 
         var initSet = new SortedSet<int>(crt.childrens);
 
@@ -88,7 +105,7 @@ class InheritanceTree
             if (children != null)
                 crt.childrens.UnionWith(children);
         }
-              
+        stackis.Pop();
 
         crt.isMerged = true;
     }
@@ -99,15 +116,18 @@ internal class Node
     //public int index; this is the dictionary key
     public SortedSet<int>? parents = null;  // parent class and interfaces; direct inheritance only
     public SortedSet<int>? childrens = null; // derived classes/interfaces; both direct and indirect inheritance
-
+    public int self;
     public bool isMerged = false;
 
-    public Node(int? parent)
+    public Node(int? parent, int self)
     {
-        if (parent != null) {
+        if (parent != null)
+        {
             parents = new SortedSet<int>();
             parents.Add((int)parent);
         }
+
+        this.self = self;
     }
 
     public void addChildren(int childrenIdx)
@@ -119,8 +139,9 @@ internal class Node
 
     public void addParent(int parentIdx)
     {
-        if (childrens == null)
-            childrens = new SortedSet<int>();
-        childrens.Add(parentIdx);
+        if (parents == null)
+            parents = new SortedSet<int>();
+        if(!parents.Contains(parentIdx))
+            parents.Add(parentIdx);
     }
 }
