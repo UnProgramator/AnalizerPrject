@@ -2,7 +2,7 @@
 
 namespace DRSTool.FileHelper;
 
-internal class FileHelperFactory
+ class FileHelperFactory
 {
     public IFileHelper getCsvHelper()
     {

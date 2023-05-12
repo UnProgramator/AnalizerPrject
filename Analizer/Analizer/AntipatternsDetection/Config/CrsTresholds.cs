@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DRSTool.Analizer.AntipatternsDetection.Config
+﻿namespace DRSTool.Analizer.AntipatternsDetection.Config
 {
     class CrsTresholds
     {
-        public int cochange { get; set; }
-        public int crossing { get; set; }
+        public int cochange { get; set; } = 3; //5
+        public int crossing { get; set; } = 2; //2
     }
 }

@@ -11,3 +11,4 @@ class ResultEntityModel : EntityInformation
         antipatterns = new Dictionary<string, List<Dictionary<string, object>>>();
     }
     public static ResultEntityModel fromBase(EntityInformation old) => new ResultEntityModel(old.Name, old.Properties);
+}

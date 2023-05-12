@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace DRSTool.Extractor.DataExtraction.CodeCoverage;
 
@@ -20,9 +21,12 @@ class JacocoExtractor
         if (input == null)
             throw new Exception("co-change commits number coupling file read error");
 
+        int unmatched = 0, total = 0;
+
         foreach (var iter in input)
         {
-            Console.WriteLine(iter.toString());
+            total++;
+            //Console.WriteLine(iter.toString());
             try
             {
                 int index;
@@ -32,36 +36,40 @@ class JacocoExtractor
                 if (index == -1)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"The Test case {iter.package + "." + iter.className} was not found. More details: ");
+                    Console.WriteLine($"Jacoco data extraction: The class {iter.package + "." + iter.className} was not found. More details: ");
                     Console.ResetColor();
+                    unmatched++;
                     continue;
                 }
 
-                int temp;
+                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("instructions-missed", iter.instructMissed));
+                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("instructions-covered", iter.instructCovered));
 
-                temp = iter.instructMissed + iter.instructCovered;
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("total-instructions", temp));
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("missed-percentage", (double)iter.instructMissed/temp));
+                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("functions-missed", iter.methodMissed));
+                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("functions-covered", iter.methodCovered));
 
-                temp= iter.methodMissed + iter.methodCovered;
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("total-functions", temp));
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("missed-functions", (double)iter.methodMissed/temp));
-
-                temp = iter.linesMissed + iter.linesCovered;
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("total-lines", temp));
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("missed-lines", (double)iter.linesMissed / temp));
+                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("branch-missed", iter.branchMissed));
+                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("branch-covered", iter.branchCovered));
+                
+                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("complexity-missed", iter.complexityMissed));
+                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("complexity-covered", iter.complexityCovered));
             }
             catch (EntityUsedButNotDeclaredException) { }
         }
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"Matched {total - unmatched} files from {total}. {unmatched} files skyped");
+        Console.ResetColor();
+
     }
 }
 
 internal class JacocoModel
 {
     [Name("PACKAGE")]
-    public string package { get; set; }
+    public string package { get; set; } = "";
     [Name("CLASS")]
-    public string className { get; set; }
+    public string className { get; set; } = "";
     [Name("INSTRUCTION_MISSED")]
     public int instructMissed { get; set; }
     [Name("INSTRUCTION_COVERED")]
@@ -70,10 +78,15 @@ internal class JacocoModel
     public int methodMissed { get; set; }
     [Name("METHOD_COVERED")]
     public int methodCovered { get; set; }
-    [Name("LINE_MISSED")]
-    public int linesMissed { get; set; }
-    [Name("LINE_COVERED")]
-    public int linesCovered { get; set; }
+    [Name("BRANCH_COVERED")]
+    public int branchMissed { get; set; }
+    [Name("BRANCH_MISSED")]
+    public int branchCovered { get; set; }
+    [Name("COMPLEXITY_MISSED")]
+    public int complexityMissed { get; set; }
+    [Name("COMPLEXITY_COVERED")]
+    public int complexityCovered { get; set; }
+
 
     public string toString()
     {
@@ -81,4 +94,4 @@ internal class JacocoModel
     }
 }
 
-    //BRANCH_MISSED   BRANCH_COVERED   COMPLEXITY_MISSED   COMPLEXITY_COVERED    
+//LINES_COVERED    LINES_MISSED 

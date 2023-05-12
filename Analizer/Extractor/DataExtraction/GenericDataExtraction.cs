@@ -1,6 +1,7 @@
 ﻿using DRSTool.CommonModels;
 using DRSTool.Extractor.DataExtraction.Utils;
 using DRSTool.FileHelper;
+using Newtonsoft.Json.Linq;
 
 namespace DRSTool.Extractor.DataExtraction
 {
@@ -16,7 +17,7 @@ namespace DRSTool.Extractor.DataExtraction
             {
                 throw new NotImplementedException();
             }
-            else if (name.EndsWith("-entity-property"))
+            else if (name.EndsWith("-entity_property"))
             {
                 extractEntityProperty(details);
             }
@@ -81,8 +82,8 @@ namespace DRSTool.Extractor.DataExtraction
                 foreach (var property in properties)
                 {
                     var rel = getProperty(property, relation);
-                    if(rel != null)
-                        Model.addEntityProperty((string)entity, (KeyValuePair<string, dynamic>)rel);
+                    if(rel is not null)
+                        Model.addEntityProperty(entity, (KeyValuePair<string, dynamic>)rel);
                 }
             }
         }
@@ -94,13 +95,23 @@ namespace DRSTool.Extractor.DataExtraction
 
         private KeyValuePair<string, object>? getProperty(dynamic property, IDictionary<string, object> relation)
         {
-            string field = (string)property["field"];
-            var value = relation[field];
+            if (property.ContainsKey("field"))
+            {
+                string field = (string)property["field"];
+                var value = relation[field];
 
-            if(!property.ContainsKey("condition") || fieldChecker.checkCondition(value, property["condition"]))
+                if (property.ContainsKey("condition"))
+                {
+                    string cond = property["condition"];
+                    if (!fieldChecker.checkCondition(value, cond))
+                    {
+                        return null;
+                    }
+                }
                 return new KeyValuePair<string, object>((string)property["property"], value);
+            }
 
-            return null;
+            return new KeyValuePair<string, object>((string)property["property"], true);
         }
 
         protected string Root { get; }

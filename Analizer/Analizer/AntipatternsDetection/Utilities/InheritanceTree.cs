@@ -1,7 +1,4 @@
 ﻿using DRSTool.CommonModels;
-using DRSTool.FileHelper;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace DRSTool.Analizer.AntipatternsDetection.Utilities;
 

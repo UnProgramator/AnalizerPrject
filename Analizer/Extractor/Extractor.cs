@@ -1,5 +1,6 @@
 ﻿using DRSTool.Extractor.Config;
 using DRSTool.Extractor.DataExtraction;
+using DRSTool.Extractor.DataExtraction.RebuturiPeMoment;
 using DRSTool.Extractor.InternalModels;
 using DRSTool.FileHelper;
 
@@ -8,9 +9,7 @@ namespace DRSTool.Extractor;
 class Extractor
 {
     public Extractor() {
-
-        var confVal = new ConfigValidator("config/AnalizerConfig - Argouml.json");
-        config = confVal.config;
+        config = ConfigValidator.getInstance().config;
 
         if (!config.Input.ContainsKey("struct"))
             throw new Exception("No input file for \"structure\" was given");
@@ -28,7 +27,7 @@ class Extractor
     public void save()
     {
         IFileHelper writer = new FileHelperFactory().getJsonHelper();
-        writer.writeContent(config.OutputFile["file"], model.compress());
+        writer.writeContent(config.OutputFile.model, model.compress());
     }
 
     private void parseInput()

@@ -13,6 +13,8 @@ internal class CrossingDetector : IAntipatternDetector
         this.tresholds = tresholds;
     }
 
+    public const string AntipatternName = "crossing";
+
     public void detect(AnalizerModel dataModel, ResultModel results)
     {
         for (int crt = 0; crt < dataModel.Entities.Length; crt++)
@@ -47,7 +49,7 @@ internal class CrossingDetector : IAntipatternDetector
                     { "fan-out", fanOut}
                 };
 
-                results.add(crt, "crossing", value);
+                results.add(crt, AntipatternName, value);
             }
         }
 

@@ -8,6 +8,8 @@ class UnstableInterfaceDetection : IAntipatternDetector
 {
     UifTresholds tresholds;
 
+    public const string AntipatternName = "UIF";
+
     public UnstableInterfaceDetection()
     {
         tresholds = new UifTresholds();
@@ -33,7 +35,7 @@ class UnstableInterfaceDetection : IAntipatternDetector
                     { "dependents-cochanges", Fset_H_intersect_S}
                 };
 
-                results.add(i, "unstable-interface", value);
+                results.add(i, AntipatternName, value);
             }
         }
     }

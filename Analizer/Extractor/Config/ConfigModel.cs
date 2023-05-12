@@ -1,9 +1,18 @@
 ﻿namespace DRSTool.Extractor.Config;
 
-internal class ConfigModel
+class ConfigModel
 {
     public bool DefaultInput { get; set; } = true;
-    public Dictionary<string, string> OutputFile { get; set; } = new Dictionary<string,string>();
+    public OutputModel OutputFile { get; set; } = new OutputModel();
     public Dictionary<string, object> Input { get; set; } = new Dictionary<string, object>();
     public string root { get; set; } = "";
+    public string? projectName { get; set; }
+
+    public class OutputModel
+    {
+        public string model { get; set; } = "model.json";
+        public string results_details { get; set; } = "results.json";
+        public string results_aggregate { get; set; } = "results.csv";
+    }
 }
+

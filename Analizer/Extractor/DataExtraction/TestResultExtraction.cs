@@ -4,6 +4,8 @@ using DRSTool.Extractor.InternalModels;
 using DRSTool.FileHelper;
 using DRSTool.FileHelper.Implementation;
 using System.Dynamic;
+using System.Runtime.CompilerServices;
+using System.Security;
 using System.Xml.Linq;
 
 namespace DRSTool.Extractor.DataExtraction;
@@ -31,8 +33,11 @@ class TestResultExtraction
         if (input == null)
             throw new Exception("co-change commits number coupling file read error");
 
+        int unmatchedClasses = 0, unmatchedTestcases = 0, total = 0;
+
         foreach (var iter in input)
         {
+            total++;
             try
             {
                 int index;
@@ -41,33 +46,53 @@ class TestResultExtraction
                 
                 if(index != -1) // found the file
                 {
-                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-total-tests", iter.testNumber));
-                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-errors", iter.errors));
-                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-skipped", iter.skipped));
-                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-failures", iter.failures));
+                    Action<string, int> addTesting = (k,val) => { 
+                                    if (model.Entities[index].Properties != null && model.Entities[index].Properties.ContainsKey(k)) 
+                                        model.Entities[index].Properties[k] += val; 
+                                    else
+                                        model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-total-tests", val));
+                    };
+
+                    addTesting("test-class-total-tests", iter.testNumber);
+                    addTesting("test-class-errors", iter.errors);
+                    addTesting("test-class-skipped", iter.skipped);
+                    addTesting("test-class-failures", iter.failures);
+                    addTesting("test-time", iter.failures);
                 }
                 else // file not found
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"The class tested by the Test case {iter.testClassName} not found. More details: \"" + iter.toString() + "\"");
+                    Console.WriteLine($"Surefire: The class tested by the Test case {iter.testClassName} not found. More details: \"" + iter.toString() + "\"");
                     Console.ResetColor();
+                    unmatchedClasses++;
                 }
 
                 index = model.getIndexForClass(iter.testClassName);
                 if (index == -1)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"The Test case {iter.testClassName} was not found. More details: \"" + iter.toString() + "\"");
+                    Console.WriteLine($"Surefire: The Test case {iter.testClassName} was not found. More details: \"" + iter.toString() + "\"");
                     Console.ResetColor();
+                    unmatchedTestcases++;
                 }
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class", true));
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-total-tests", iter.testNumber));
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-errors", iter.errors));
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-skipped", iter.skipped));
-                model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-failures", iter.failures));
+                else
+                {
+                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class", true));
+                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-total-tests", iter.testNumber));
+                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-errors", iter.errors));
+                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-skipped", iter.skipped));
+                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-failures", iter.failures));
+                    model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-time", iter.failures));
+                }
+
             }
             catch (EntityUsedButNotDeclaredException) { }
         }
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"Matched {total - unmatchedClasses} class from a total of {total}. {unmatchedClasses} files skyped");
+        Console.WriteLine($"Matched {total - unmatchedTestcases} test cases from a total of {total}. {unmatchedTestcases} files skyped");
+        Console.ResetColor();
     }
 
     private static int getIndex(TestResultModel element, ConstructionModel model)
@@ -100,7 +125,7 @@ class TestResultExtraction
 
     private TestResultExtraction(string root) => this.root = root;
 
-    private static TestResultExtraction _instance;
+    private static TestResultExtraction? _instance;
 
     public static TestResultExtraction createInstance(string root)
     {

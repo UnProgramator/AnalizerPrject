@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DRSTool.Analizer.AntipatternsDetection.Config
+﻿namespace DRSTool.Analizer.AntipatternsDetection.Config
 {
     internal class UifTresholds
     {
-        public int StructImpact { get; set; }
-        public int HistoryImpact { get; set; }
-        public int cochange { get; set; }
+        public int StructImpact { get; set; } = 4;
+        public int HistoryImpact { get; set; } = 2;
+        public int cochange { get; set; } = 11;
     }
 }

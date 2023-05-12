@@ -3,6 +3,7 @@ using DRSTool.CommonModels;
 using DRSTool.Analizer.AntipatternsDetection;
 using DRSTool.Analizer.Models;
 using DRSTool.Analizer.AntipatternsDetection.Implementations;
+using DRSTool.Extractor.Config;
 
 namespace DRSTool.Analizer;
 
@@ -18,7 +19,7 @@ class Analizer
         if (model == null)
             throw new Exception("Model cannot be null");
         this.model = model;
-        results = ResultModel.fromExtractorModel(model);
+        results = new ResultModel(model);
     }
 
     public Analizer(string modelFilePath)
@@ -29,7 +30,7 @@ class Analizer
             throw new Exception("File model could not be read");
 
         model = AnalizerModel.decompress(cm);
-        results = ResultModel.fromExtractorModel(model);
+        results = new ResultModel(model);
     }
 
     public void analize()
@@ -38,13 +39,20 @@ class Analizer
         //new CliqueDetector().detect(model, results);
         new CrossingDetector().detect(model, results);
         new UnhealthyInheritanceHierarchyDetector().detect(model, results);
-        //new ModularityViolationGroupDetector().detect(model, results);
+        new ModularityViolationGroupDetector().detect(model, results);
+        //new PackageCycleDetector().detect(model, results);
     }
 
     public void saveResults()
     {
-        IFileHelper fileWriter = new FileHelperFactory().getJsonHelper();
-        fileWriter.writeContent("analizerResults.json", results);
+        IFileHelper fileWriter = new FileHelperFactory().getFileHelper(ConfigValidator.getInstance().config.OutputFile.results_details);
+        fileWriter.writeContent(ConfigValidator.getInstance().config.OutputFile.results_details, results.resultEntity);
+    }
+
+    public void saveAggregatedResults()
+    {
+        IFileHelper fileWriter = new FileHelperFactory().getFileHelper(ConfigValidator.getInstance().config.OutputFile.results_aggregate);
+        fileWriter.writeContent(ConfigValidator.getInstance().config.OutputFile.results_aggregate, results.aggregate());
     }
 }
 

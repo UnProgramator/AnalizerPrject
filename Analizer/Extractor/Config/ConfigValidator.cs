@@ -11,11 +11,33 @@ class ConfigValidator
     private ConfigModel _config;
     public ConfigModel config { get => _config; }
 
+    private static ConfigValidator? _instance;
+
+    public static ConfigValidator creatConfig(string? inputFile = null)
+    {
+        if (_instance is null)
+            if (inputFile is null)
+                _instance = getCofigForDefaultLocation();
+            else
+                _instance = new ConfigValidator(inputFile);
+        else
+            throw new Exception("Config already instantiated");
+        return _instance;
+    }
+
+    public static ConfigValidator getInstance()
+    {
+        if (_instance is null)
+            throw new Exception("Config not intantiated");
+        return _instance;
+    }
+
+
     /// <summary>
     /// Read the config file and validates the content. Completes with default values when necessarily.
     /// </summary>
     /// <param name="filePath">The path to the config file.</param>
-    public ConfigValidator(string filePath)
+    private ConfigValidator(string filePath)
     {
         JsonFileHelper jfh = JsonFileHelper.getInstance();
         var temp_config = jfh.getContent<ConfigModel>(filePath);
@@ -25,7 +47,7 @@ class ConfigValidator
     /// <summary>
     /// Returns a Config object, with the input file at the default location and name [./AnalizerConfig.json]
     /// </summary>
-    public static ConfigValidator getCofigForDefaultLocation()
+    private static ConfigValidator getCofigForDefaultLocation()
     {
         return new ConfigValidator("AnalizerConfig.json");
     }
@@ -42,51 +64,52 @@ class ConfigValidator
         if (_config == null)
             throw new InvalidConfigException("Returned reference was null. File don't exist or error during reading");
 
-        validateOutputFile(_config);
+        //validateOutputFile(_config);
 
         //validateInput(_config);
 
         return _config;
     }
 
+    //no longer needed
     /// <summary>
     /// validate output file info and write default values if necessarily
     /// </summary>
     /// <param name="_config">The content read from the config file</param>
     /// <exception cref="InvalidConfigOutputException">When "Output File" input data validation not succesfull</exception>
-    private void validateOutputFile(ConfigModel _config)
-    {
-        string? fileFormat = null;
+    //private void validateOutputFile(ConfigModel _config)
+    //{
+    //    string? fileFormat = null;
 
-        //verify out file; if none specified, then default
-        if (!_config.OutputFile.ContainsKey("file"))
-            _config.OutputFile.Add("file", "./results");
-        else
-            fileFormat = FileHelper.FileUtilities.getFileExtension(_config.OutputFile["file"]);
+    //    //verify out file; if none specified, then default
+    //    if (!_config.OutputFile.ContainsKey("file"))
+    //        _config.OutputFile.Add("file", "./results");
+    //    else
+    //        fileFormat = FileHelper.FileUtilities.getFileExtension(_config.OutputFile["file"]);
 
-        //verify out file format; if none specified, then take from string
-        if (!_config.OutputFile.ContainsKey("format")) {
-            if (fileFormat == null)
-            {
-                fileFormat = ".json";
-                _config.OutputFile["file"] += fileFormat;
-            }
-            _config.OutputFile["format"] = fileFormat;
-        }
-        
-        else {
-            //if file format is specified and but not added to the file, then it is added
-            if (fileFormat == null)
-                _config.OutputFile["file"] += _config.OutputFile["format"];
-            //verify if specified file format and the one from the path are the same
-            else if (!_config.OutputFile["format"].Equals(fileFormat))
-                throw new InvalidConfigOutputException("File format from param and from file path are different");
-        }
+    //    //verify out file format; if none specified, then take from string
+    //    if (!_config.OutputFile.ContainsKey("format")) {
+    //        if (fileFormat == null)
+    //        {
+    //            fileFormat = ".json";
+    //            _config.OutputFile["file"] += fileFormat;
+    //        }
+    //        _config.OutputFile["format"] = fileFormat;
+    //    }
 
-        //verify if format is accepted by the current implementation
-        if (!FileHelper.FileUtilities.acceptedFileExtensions.Contains(_config.OutputFile["format"]))
-            throw new UnsuportedFileTypeException(_config.OutputFile["format"]);
-    }
+    //    else {
+    //        //if file format is specified and but not added to the file, then it is added
+    //        if (fileFormat == null)
+    //            _config.OutputFile["file"] += _config.OutputFile["format"];
+    //        //verify if specified file format and the one from the path are the same
+    //        else if (!_config.OutputFile["format"].Equals(fileFormat))
+    //            throw new InvalidConfigOutputException("File format from param and from file path are different");
+    //    }
+
+    //    //verify if format is accepted by the current implementation
+    //    if (!FileHelper.FileUtilities.acceptedFileExtensions.Contains(_config.OutputFile["format"]))
+    //        throw new UnsuportedFileTypeException(_config.OutputFile["format"]);
+    //}
 
     /// <summary>
     /// Validate the input data. Complete the default file name

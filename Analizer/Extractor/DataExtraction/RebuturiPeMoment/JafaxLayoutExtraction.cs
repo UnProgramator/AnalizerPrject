@@ -1,7 +1,7 @@
 ﻿using DRSTool.CommonModels;
 using DRSTool.FileHelper;
 
-namespace DRSTool.Extractor.DataExtraction;
+namespace DRSTool.Extractor.DataExtraction.RebuturiPeMoment;
 
 class JafaxLayoutExtraction
 {
@@ -10,7 +10,7 @@ class JafaxLayoutExtraction
         var fileReader = new FileHelperFactory().getJsonHelper();
         var input = fileReader.getArrayContent<Dictionary<string, object>>(fileName);
 
-        if(input == null)
+        if (input == null)
             throw new Exception("Read or parse error or file Empty");
 
         var classes = input.Where(x => x.ContainsKey("type") && x["type"] is not null && x["type"].Equals("Class"));
@@ -20,7 +20,7 @@ class JafaxLayoutExtraction
         foreach (var x in input)
         {
             string name = (string)x["fileName"];
-            if(nameTrim != null)
+            if (nameTrim != null)
                 name = name.Substring(nameTrim.Length);
             //name = name.Substring(0, name.LastIndexOf('/')) + (string)x["name"];
 
@@ -36,12 +36,12 @@ class JafaxLayoutExtraction
             if (x.ContainsKey("superClass"))
             {
                 long id = (long)x["superClass"];
-                string superName = entitesJafaxIdToName[id]; 
+                string superName = entitesJafaxIdToName[id];
                 model.addStructuralRelation(thisName, superName, new KeyValuePair<string, dynamic>("inheritance", true));
             }
             if (x.ContainsKey("interfaces"))
             {
-                foreach(long id in (long[])x["interfaces"])
+                foreach (long id in (long[])x["interfaces"])
                 {
                     string interName = entitesJafaxIdToName[id];
                     model.addStructuralRelation(thisName, interName, new KeyValuePair<string, dynamic>("inheritance", true));

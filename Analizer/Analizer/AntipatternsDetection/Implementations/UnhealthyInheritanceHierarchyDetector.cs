@@ -8,6 +8,8 @@ internal class UnhealthyInheritanceHierarchyDetector : IAntipatternDetector
 {
     private InheritanceTree tree;
 
+    public const string AntipatternName = "UIH";
+
     public UnhealthyInheritanceHierarchyDetector(InheritanceTree tree)
     {
         this.tree = tree;
@@ -44,12 +46,19 @@ internal class UnhealthyInheritanceHierarchyDetector : IAntipatternDetector
                 if (!tree.inherits(d, b)) continue; // check for indirect inheritance
 
                 var value = new Dictionary<string, object> {
-                    { "type", "base-depends-on-derived" }
+                    { "type", "base-depends-on-derived" },
+                    { "participant", "isBase" }
                 };
 
-                results.add(b, "unhealthy-inheritance", value);
+                results.add(b, AntipatternName, value);
 
-                break; // there may be problems if it is the case a base depends on multiple deriveds. If ti depends on one or on more is the same
+                value = new Dictionary<string, object> {
+                    { "type", "base-depends-on-derived" },
+                    { "participant", "isDerived" }
+                };
+                results.add(d, AntipatternName, value);
+
+                //break; // there may be problems if it is the case a base depends on multiple deriveds. If ti depends on one or on more is the same
             } 
         }
     }
@@ -83,7 +92,7 @@ internal class UnhealthyInheritanceHierarchyDetector : IAntipatternDetector
                         { "derived-class", _derived }
                     };
 
-                    results.add(b, "unhealthy-inheritance", value_base);
+                    results.add(b, AntipatternName, value_base);
 
                     var value_derived = new Dictionary<string, object> {
                         { "type", "class-depends-on-base-and-derived" },
@@ -91,7 +100,7 @@ internal class UnhealthyInheritanceHierarchyDetector : IAntipatternDetector
                         { "class", _class }
                     };
 
-                    results.add(d, "unhealthy-inheritance", value_derived);
+                    results.add(d, AntipatternName, value_derived);
 
                     var value_class = new Dictionary<string, object> {
                         { "type", "class-depends-on-base-and-derived" },
@@ -100,9 +109,9 @@ internal class UnhealthyInheritanceHierarchyDetector : IAntipatternDetector
                         { "derived-class", _derived }
                     };
 
-                    results.add(c, "unhealthy-inheritance", value_class);
+                    results.add(c, AntipatternName, value_class);
 
-                    //break; //it's enough if it occured for a derived of the analized base class
+                    //break; //it's enough if it occured for a derived of the analized base class // i changed my mind recently, so... yea, it isn't enoguh for now
                 }
             }
         }

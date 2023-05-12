@@ -139,7 +139,7 @@ class FieldChecker
                 operands = opsL.Split(',').Select(e => e.Trim()).ToArray(); //split then trim
                 break;
             default:
-                operands = conditions.Substring(conditions.IndexOf(' ')+1);
+                operands = conditions.Substring(conditions.IndexOf(' ')).Trim();
                 break;
         }
 

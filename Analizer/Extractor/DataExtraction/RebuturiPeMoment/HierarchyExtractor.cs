@@ -2,7 +2,7 @@
 using DRSTool.FileHelper.Implementation;
 using CsvHelper.Configuration.Attributes;
 
-namespace DRSTool.Extractor.DataExtraction;
+namespace DRSTool.Extractor.DataExtraction.RebuturiPeMoment;
 
 class HierarchyExtractor
 {
@@ -13,7 +13,7 @@ class HierarchyExtractor
         if (input == null)
             throw new Exception("hyerarchy file read error");
 
-        foreach(var iter in input)
+        foreach (var iter in input)
         {
             model.addStructuralRelation(iter.Source, iter.Target, new KeyValuePair<string, dynamic>("inheritance", true));
         }
