@@ -46,18 +46,18 @@ class TestResultExtraction
                 
                 if(index != -1) // found the file
                 {
-                    Action<string, int> addTesting = (k,val) => { 
-                                    if (model.Entities[index].Properties != null && model.Entities[index].Properties.ContainsKey(k)) 
-                                        model.Entities[index].Properties[k] += val; 
+                    Action<int, string, int> addTesting = (i, k, val) => { 
+                                    if (model.Entities[i].Properties != null && model.Entities[i].Properties.ContainsKey(k)) 
+                                        model.Entities[i].Properties[k] += val; 
                                     else
-                                        model.addEntityProperty(index, new KeyValuePair<string, dynamic>("test-class-total-tests", val));
+                                        model.addEntityProperty(i, new KeyValuePair<string, dynamic>(k, val));
                     };
 
-                    addTesting("test-class-total-tests", iter.testNumber);
-                    addTesting("test-class-errors", iter.errors);
-                    addTesting("test-class-skipped", iter.skipped);
-                    addTesting("test-class-failures", iter.failures);
-                    addTesting("test-time", iter.failures);
+                    addTesting(index, "test-class-total-tests", iter.testNumber);
+                    addTesting(index, "test-class-errors", iter.errors);
+                    addTesting(index, "test-class-skipped", iter.skipped);
+                    addTesting(index, "test-class-failures", iter.failures);
+                    addTesting(index, "test-time", iter.failures);
                 }
                 else // file not found
                 {
