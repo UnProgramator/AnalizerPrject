@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Config.CrsTresholds" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Config\CrsTresholds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Config.MvgTresholds" Collapsed="true">
+    <Position X="14" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Config\MvgTresholds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Config.UifTresholds" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Config\UifTresholds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Implementations.CrossingDetector" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Implementations\CrossingDetector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Implementations.ModularityViolationGroupDetector" Collapsed="true">
+    <Position X="14" Y="1.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Implementations\ModularityViolationGroupDetector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Implementations.UnhealthyInheritanceHierarchyDetector" Collapsed="true">
+    <Position X="17" Y="1.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAiAAQAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Implementations\UnhealthyInheritanceHierarchyDetector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Implementations.UnstableInterfaceDetection" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgAAQAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Implementations\UnstableInterfaceDetection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Utilities.InheritanceTree" Collapsed="true">
+    <Position X="17" Y="2.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAQIEAEASAAAEAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Utilities\InheritanceTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Utilities.Node" Collapsed="true">
+    <Position X="17" Y="3.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAACAAAIAAUAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Utilities\InheritanceTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.Models.ResultAggregationModel" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAECEAhgABgACAAQAAAQCAgESACAAgAAgAAAqIAwUAE=</HashCode>
+      <FileName>Analizer\Models\ResultAggregationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.Models.ResultEntityModel" Collapsed="true">
+    <Position X="10.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAAAA=</HashCode>
+      <FileName>Analizer\Models\ResultEntityModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.Models.ResultModel" Collapsed="true">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAQAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Analizer\Models\ResultModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.CommonModels.AnalizerCompresedModel" Collapsed="true">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAACAAAAAAIAAAAAAAAAAAAAAAAEAAAACAAA=</HashCode>
+      <FileName>CommonModels\AnalizerCompresedModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.CommonModels.AnalizerModel" Collapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAEAABAAACAAAAAAFACAgAgAAAAAAAAAkAAACCAAA=</HashCode>
+      <FileName>CommonModels\AnalizerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.CommonModels.EntitiesRelations" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>CommonModels\EntitiesRelations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.CommonModels.EntityInformation" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>CommonModels\EntityInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.Config.ConfigModel" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAggAAgAEAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Extractor\Config\ConfigModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.Config.ConfigValidator" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAOAAAAIAAAAAAAAAAAAAgAAAAAAAQAACAAAAJAAAA=</HashCode>
+      <FileName>Extractor\Config\ConfigValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.InternalModels.ConstructionModel" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAgAAAAEAEAAAAAAAAAAAAAAAAACEBAA=</HashCode>
+      <FileName>Extractor\InternalModels\ConstructionModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.InternalModels.EntityModel" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAQCgEAAAAAAAAAAAQAQAAAABACAAAAAA=</HashCode>
+      <FileName>Extractor\InternalModels\EntityModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.Extractor" Collapsed="true">
+    <Position X="3.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAIAIAAA=</HashCode>
+      <FileName>Extractor\Extractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.Analizer" Collapsed="true">
+    <Position X="14" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAggAAAAAAAAIAAE=</HashCode>
+      <FileName>Analizer\Analizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CochangeExtractor" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CochangeExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CochangeModel" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CochangeExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CochangePercentageModel" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CochangeExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CodeCoverageExtraction" Collapsed="true">
+    <Position X="2.5" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAEAgBAAAAAAAAAQAAAAAAAgAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CodeCoverageExtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.EntitiesExtractor" Collapsed="true">
+    <Position X="2.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\EntitiesExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.GenericDataExtraction" Collapsed="true">
+    <Position X="2.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAAABgAAAAABCAAAEAAAAAAAAAAAAAAAAgAAAAAAEA=</HashCode>
+      <FileName>Extractor\DataExtraction\GenericDataExtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.TestResultExtraction" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAEQgFAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\TestResultExtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.TestResultModel" Collapsed="true">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAAAAAAAAAAEABAAAQAAAAJAFEAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\TestResultExtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CodeCoverage.JacocoExtractor" Collapsed="true">
+    <Position X="4.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CodeCoverage\JacocoExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CodeCoverage.JacocoModel" Collapsed="true">
+    <Position X="6.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECEIAAABAACBAAAAAADAAAAAAAAAAAAAAAAIAgAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CodeCoverage\JacocoExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.Utils.FieldChecker" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAIAAAAAAGCEAgAAAAAAAEAAAAAIAAAgAAAQEAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\Utils\FieldChecker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.FileHelper.FileHelperFactory" Collapsed="true">
+    <Position X="11.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAiAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FileHelper\FileHelperFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.FileHelper.Implementation.CsvFileHelper" Collapsed="true">
+    <Position X="11.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiAAAAAACAABAAAAAAAAAAAAAABAAAQAAAAAACAgAAA=</HashCode>
+      <FileName>FileHelper\Implementation\CsvFileHelper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DRSTool.FileHelper.Implementation.JsonFileHelper" Collapsed="true">
+    <Position X="13.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiAAAAAACAABAAAAAAAAAAAAAABAAAQAAAAAACAgAAA=</HashCode>
+      <FileName>FileHelper\Implementation\JsonFileHelper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.69" />
+  </Class>
+  <Class Name="DRSTool.FileHelper.FileUtilities" Collapsed="true">
+    <Position X="13.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FileHelper\FileUtilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Program" Collapsed="true">
+    <Position X="7.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="DRSTool.Analizer.AntipatternsDetection.IAntipatternDetector" Collapsed="true">
+    <Position X="13.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\IAntipatternDetector.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DRSTool.FileHelper.IFileHelper" Collapsed="true">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAACAAAAAAAAAAAAAAAAABAAAAAAAAAACAgAAA=</HashCode>
+      <FileName>FileHelper\FileHelperInterface.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

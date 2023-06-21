@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DRSTool.Extractor.Config.ConfigModel">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="DRSTool.Extractor.Config.ConfigModel.OutputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Extractor\Config\ConfigModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAggAAgAEAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Extractor\Config\ConfigModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.Config.ConfigValidator">
+    <Position X="2.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAOAAAAIAAAAAAAAAAAAAgAAAAAAAQAACAAAAJAAAA=</HashCode>
+      <FileName>Extractor\Config\ConfigValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.InternalModels.ConstructionModel">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAgAAAAEAEAAAAAAAAAAAAAAAAACEBAA=</HashCode>
+      <FileName>Extractor\InternalModels\ConstructionModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.InternalModels.EntityModel">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAQCgEAAAAAAAAAAAQAQAAAABACAAAAAA=</HashCode>
+      <FileName>Extractor\InternalModels\EntityModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.Extractor">
+    <Position X="8.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAIAIAAA=</HashCode>
+      <FileName>Extractor\Extractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CochangeExtractor">
+    <Position X="8.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CochangeExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CochangeModel">
+    <Position X="8.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CochangeExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CochangePercentageModel">
+    <Position X="8.75" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CochangeExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CodeCoverageExtraction">
+    <Position X="3.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAEAgBAAAAAAAAAQAAAAAAAgAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CodeCoverageExtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.EntitiesExtractor">
+    <Position X="14.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\EntitiesExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.GenericDataExtraction">
+    <Position X="11.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAAABgAAAAABCAAAEAAAAAAAAAAAAAAAAgAAAAAAEA=</HashCode>
+      <FileName>Extractor\DataExtraction\GenericDataExtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.TestResultExtraction">
+    <Position X="6.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAEQgFAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\TestResultExtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.TestResultModel">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAAAAAAAAAAEABAAAQAAAAJAFEAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\TestResultExtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CodeCoverage.JacocoExtractor">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CodeCoverage\JacocoExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.CodeCoverage.JacocoModel">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECEIAAABAACBAAAAAADAAAAAAAAAAAAAAAAIAgAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\CodeCoverage\JacocoExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Extractor.DataExtraction.Utils.FieldChecker">
+    <Position X="12" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAIAAAAAAGCEAgAAAAAAAEAAAAAIAAAgAAAQEAAAAAA=</HashCode>
+      <FileName>Extractor\DataExtraction\Utils\FieldChecker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

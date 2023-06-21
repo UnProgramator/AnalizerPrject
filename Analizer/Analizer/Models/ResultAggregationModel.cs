@@ -17,13 +17,13 @@ namespace DRSTool.Analizer.Models
 
             setProjectName();
 
-            //antipatterns
-            if (src.antipatterns.ContainsKey(CliqueDetector.AntipatternName)) CLQ = 1;
-            if (src.antipatterns.ContainsKey(CrossingDetector.AntipatternName)) CRS = 1;
-            if (src.antipatterns.ContainsKey(UnhealthyInheritanceHierarchyDetector.AntipatternName)) UIH = 1;
-            if (src.antipatterns.ContainsKey(UnstableInterfaceDetection.AntipatternName)) UIF = 1;
-            if (src.antipatterns.ContainsKey(ModularityViolationGroupDetector.AntipatternName)) MVG = 1;
-            if (src.antipatterns.ContainsKey(PackageCycleDetector.AntipatternName)) PKC = 1;
+            //Antipatterns
+            if (src.Antipatterns.ContainsKey(CliqueDetector.AntipatternName)) CLQ = 1;
+            if (src.Antipatterns.ContainsKey(CrossingDetector.AntipatternName)) CRS = 1;
+            if (src.Antipatterns.ContainsKey(UnhealthyInheritanceHierarchyDetector.AntipatternName)) UIH = 1;
+            if (src.Antipatterns.ContainsKey(UnstableInterfaceDetection.AntipatternName)) UIF = 1;
+            if (src.Antipatterns.ContainsKey(ModularityViolationGroupDetector.AntipatternName)) MVG = 1;
+            if (src.Antipatterns.ContainsKey(PackageCycleDetector.AntipatternName)) PKC = 1;
 
             if (src.Properties is null) throw new Exception("Properties cannot be null");
 

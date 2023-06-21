@@ -31,15 +31,16 @@ class FieldChecker
             cond = cond.Substring(1);
         }
 
-        if (cond.Equals(IN))
+        if (cond.Equals(BE))
         {
             if(ops is not Array)
                 throw new Exception();
             int left, right;
             left = int.Parse(((string[])ops)[0]);
             right = int.Parse(((string[])ops)[1]);
+            compRez = value >= left && value <= right;
         }
-        else if (cond.Equals(BE))
+        else if (cond.Equals(IN))
         {
             if (ops is not string[])
                 throw new Exception();

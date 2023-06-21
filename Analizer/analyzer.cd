@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Config.CrsTresholds">
+    <Position X="3.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Config\CrsTresholds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Config.MvgTresholds">
+    <Position X="5.75" Y="4.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Config\MvgTresholds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Config.UifTresholds">
+    <Position X="0.5" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Config\UifTresholds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Implementations.CrossingDetector">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Implementations\CrossingDetector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Implementations.ModularityViolationGroupDetector">
+    <Position X="5.75" Y="2" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Implementations\ModularityViolationGroupDetector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Implementations.UnhealthyInheritanceHierarchyDetector">
+    <Position X="9.25" Y="2" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAiAAQAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Implementations\UnhealthyInheritanceHierarchyDetector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Implementations.UnstableInterfaceDetection">
+    <Position X="0.5" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgAAQAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Implementations\UnstableInterfaceDetection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Utilities.InheritanceTree">
+    <Position X="9.25" Y="4.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAQIEAEASAAAEAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Utilities\InheritanceTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.AntipatternsDetection.Utilities.Node">
+    <Position X="9.25" Y="7.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAACAAAIAAUAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\Utilities\InheritanceTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.Models.ResultAggregationModel">
+    <Position X="15.75" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAECEAhgABgACAAQAAAQCAgESACAAgAAgAAAqIAwUAE=</HashCode>
+      <FileName>Analizer\Models\ResultAggregationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.Models.ResultEntityModel">
+    <Position X="13.5" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAAAA=</HashCode>
+      <FileName>Analizer\Models\ResultEntityModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.Models.ResultModel">
+    <Position X="13.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAQAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Analizer\Models\ResultModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DRSTool.Analizer.Analizer">
+    <Position X="2.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAggAAAAAAAAIAAE=</HashCode>
+      <FileName>Analizer\Analizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="DRSTool.Analizer.AntipatternsDetection.IAntipatternDetector">
+    <Position X="4" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analizer\AntipatternsDetection\IAntipatternDetector.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

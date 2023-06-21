@@ -56,9 +56,3 @@ class Analizer
     }
 }
 
-internal class tempModel
-{
-    public string BaseName { get; set; } = "";
-    public string DerivedName { get; set; } = "";
-    public int cochangeTimes { get; set; }
-}

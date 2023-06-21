@@ -19,10 +19,10 @@ class ResultModel
 
     public void add(int entityID, string antipatternName, Dictionary<string, object> value)
     {
-        if (resultEntity[entityID].antipatterns.ContainsKey(antipatternName))
-            resultEntity[entityID].antipatterns[antipatternName].Add(value);
+        if (resultEntity[entityID].Antipatterns.ContainsKey(antipatternName))
+            resultEntity[entityID].Antipatterns[antipatternName].Add(value);
         else
-            resultEntity[entityID].antipatterns.Add(antipatternName, new List<Dictionary<string, object>> { value });
+            resultEntity[entityID].Antipatterns.Add(antipatternName, new List<Dictionary<string, object>> { value });
     }
 
     public ResultAggregationModel[] aggregate()
